@@ -1,0 +1,47 @@
+Description,Type,Model,Year,searialNum,Status,Location,warExp,warehouseAdress,orderNum,renterID
+"DeWalt 20V MAX Cordless Drill/Driver",Drill,DCD771C2,2022,DEW-DCD771C2-22-001,Rented,With Renter,2025-06-01,"123 Main St, Columbus, OH 43215",50001,12
+"DeWalt 20V MAX Cordless Drill/Driver",Drill,DCD771C2,2024,DEW-DCD771C2-24-001,Rented,With Renter,2027-08-15,"456 Oak Ave, Cleveland, OH 44114",50002,5
+"Makita 18V LXT Sub-Compact Drill",Drill,XFD131,2023,MAK-XFD131-23-001,Rented,With Renter,2026-03-10,"789 Pine Ln, Cincinnati, OH 45202",50003,22
+"Ryobi 18V ONE+ Cordless Drill",Drill,P215K,2022,RYO-P215K-22-001,Rented,With Renter,2025-01-20,"101 Maple Dr, Toledo, OH 43604",50004,40
+"Milwaukee M18 Compact Drill/Driver",Drill,2801-20,2023,MIL-280120-23-001,Rented,With Renter,2026-07-01,"202 Birch Rd, Akron, OH 44308",50005,5
+"Black+Decker 5-inch Random Orbit Sander",Sander,BDERO100,2021,BND-BDERO100-21-001,Rented,With Renter,2024-04-12,"303 Cedar Pl, Dayton, OH 45402",50006,18
+"Black+Decker 5-inch Random Orbit Sander",Sander,BDERO100,2023,BND-BDERO100-23-001,Rented,With Renter,2026-02-15,"404 Elm Blvd, Columbus, OH 43201",50007,33
+"Bosch 5-inch Random Orbit Sander",Sander,ROS20VSC,2022,BOS-ROS20VSC-22-001,Rented,With Renter,2025-09-30,"505 Spruce Way, Cleveland, OH 44115",50008,2
+"DeWalt 5-inch Random Orbit Sander",Sander,DWE6421,2023,DEW-DWE6421-23-001,Rented,With Renter,2026-10-01,"606 Ash Ct, Cincinnati, OH 45203",50009,28
+"EGO POWER+ 650 CFM Leaf Blower",Leaf Blower,LB6504,2023,EGO-LB6504-23-001,Rented,With Renter,2026-05-05,"707 Willow Bend, Toledo, OH 43606",50010,19
+"Ryobi 40V 550 CFM Leaf Blower",Leaf Blower,RY40470,2022,RYO-RY40470-22-001,Rented,With Renter,2025-11-11,"808 Poplar St, Akron, OH 44304",50011,42
+"Toro Ultra Electric Blower/Vac",Leaf Blower,51621,2021,TOR-51621-21-001,Rented,With Renter,2024-08-01,"909 Redwood Aly, Dayton, OH 45403",50012,1
+"EGO POWER+ 580 CFM Leaf Blower",Leaf Blower,LB5804,2022,EGO-LB5804-22-001,Rented,With Renter,2025-04-20,"111 Chestnut St, Columbus, OH 43210",50013,15
+"Greenworks 20-Inch Corded Lawn Mower",Lawn Mower,25022,2022,GRW-25022-22-001,Rented,With Renter,2025-03-14,"222 Sycamore Ave, Cleveland, OH 44113",50014,37
+"Sun Joe 14-Inch Electric Lawn Mower",Lawn Mower,MJ401E,2021,SNJ-MJ401E-21-001,Rented,With Renter,2024-06-30,"333 Cypress Ln, Cincinnati, OH 45204",50015,22
+"Ryobi 13-Inch Corded Lawn Mower",Lawn Mower,RYAC130,2023,RYO-RYAC130-23-001,Available,Warehouse,2026-09-01,"444 Juniper Dr, Toledo, OH 43608",,
+"Greenworks 13-Inch Corded Lawn Mower",Lawn Mower,MO13B00,2023,GRW-MO13B00-23-001,Available,Warehouse,2026-07-15,"555 Hemlock Rd, Akron, OH 44311",,
+"Sun Joe SPX3000 Electric Pressure Washer",Pressure Washer,SPX3000,2022,SNJ-SPX3000-22-001,Available,Warehouse,2025-05-25,"666 Holly Pl, Dayton, OH 45410",,
+"Sun Joe SPX3000 Electric Pressure Washer",Pressure Washer,SPX3000,2024,SNJ-SPX3000-24-001,Available,Warehouse,2027-04-10,"777 Sequoia Blvd, Columbus, OH 43212",,
+"Ryobi 2300 PSI Electric Pressure Washer",Pressure Washer,RY142300,2023,RYO-RY142300-23-001,Available,Warehouse,2026-08-01,"888 Magnolia Way, Cleveland, OH 44102",,
+"Karcher K1700 Electric Pressure Washer",Pressure Washer,K1700,2022,KAR-K1700-22-001,Available,Warehouse,2025-10-10,"999 Dogwood Ct, Cincinnati, OH 45205",,
+"Epson Home Cinema 1080 Projector",Projector,Home Cinema 1080,2021,EPS-HC1080-21-001,Available,Warehouse,2024-11-01,"121 Ironwood Bend, Toledo, OH 43614",,
+"Epson Home Cinema 1080 Projector",Projector,Home Cinema 1080,2023,EPS-HC1080-23-001,Available,Warehouse,2026-01-15,"232 Aspen St, Akron, OH 44303",,
+"BenQ TH575 1080p Gaming Projector",Projector,TH575,2022,BEN-TH575-22-001,Available,Warehouse,2025-02-28,"343 Beech Aly, Dayton, OH 45404",,
+"Anker Nebula Solar Portable Projector",Projector,Nebula Solar,2023,ANK-NEBSOL-23-001,Available,Warehouse,2026-06-01,"454 Larch St, Columbus, OH 43214",,
+"Lifetime 6-Foot Folding Table",Folding Table,22901,2020,LFT-22901-20-001,Available,Warehouse,2024-01-01,"565 Elder Ave, Cleveland, OH 44106",,
+"Lifetime 6-Foot Folding Table",Folding Table,22901,2022,LFT-22901-22-001,Available,Warehouse,2025-03-01,"676 Fir Ln, Cincinnati, OH 45206",,
+"Cosco 6-Foot Folding Table",Folding Table,14088PBL1E,2021,COS-14088-21-001,Available,Warehouse,2024-07-20,"787 Pinecone Dr, Toledo, OH 43615",,
+"Lifetime 5-Foot Round Folding Table",Folding Table,80160,2023,LFT-80160-23-001,Available,Warehouse,2026-04-18,"898 Yew Rd, Akron, OH 44313",,
+"Coleman Sundome 4-Person Tent",Tent,Sundome 4P,2022,COL-SUN4P-22-001,Available,Warehouse,2025-05-12,"901 Hawthorn Pl, Dayton, OH 45405",,
+"Coleman Sundome 4-Person Tent",Tent,Sundome 4P,2024,COL-SUN4P-24-001,Maintenance,Warehouse,2027-02-01,"1010 Orchard Blvd, Columbus, OH 43202",,
+"REI Co-op Half Dome 2-Person Tent",Tent,Co-op Half Dome 2,2023,REI-HD2-23-001,Maintenance,Warehouse,2026-03-15,"1111 Grove Way, Cleveland, OH 44109",,
+"Big Agnes Copper Spur HV UL2 Tent",Tent,Copper Spur HV UL2,2023,BAG-CSUL2-23-001,Maintenance,Warehouse,2026-06-20,"1212 Park Ct, Cincinnati, OH 45207",,
+"Coleman Montana 8-Person Tent",Tent,Montana 8P,2022,COL-MON8P-22-001,Maintenance,Warehouse,2025-08-30,"1313 River Bend, Toledo, OH 43620",,
+"Singer 4423 Heavy Duty Sewing Machine",Sewing Machine,4423 Heavy Duty,2021,SNG-4423-21-001,Maintenance,Warehouse,2024-10-01,"1414 Meadow St, Akron, OH 44301",,
+"Singer 4423 Heavy Duty Sewing Machine",Sewing Machine,4423 Heavy Duty,2023,SNG-4423-23-001,Maintenance,Warehouse,2026-11-15,"1515 Lake Aly, Dayton, OH 45406",,
+"Brother CS6000i Sewing Machine",Sewing Machine,CS6000i,2022,BRO-CS6000I-22-001,Maintenance,Warehouse,2025-07-01,"1616 Forest St, Columbus, OH 43203",,
+"Singer M3330 Sewing Machine",Sewing Machine,M3330,2023,SNG-M3330-23-001,Maintenance,Warehouse,2026-01-25,"1717 Hillside Ave, Cleveland, OH 44111",,
+"Werner 6-Foot Fiberglass Step Ladder",Step Ladder,6006,2022,WER-6006-22-001,Maintenance,Warehouse,2025-12-01,"1818 Valley Ln, Cincinnati, OH 45208",,
+"Gorilla 5.5-Foot Aluminum Step Ladder",Step Ladder,GLX-5B,2023,GOR-GLX5B-23-001,Maintenance,Warehouse,2026-09-10,"1919 Summit Dr, Toledo, OH 43623",,
+"Little Giant 22-Foot Multi-Position Ladder",Step Ladder,10102,2021,LTL-10102-21-001,Available,Warehouse,2024-05-15,"123 Main St, Columbus, OH 43215",,
+"Werner 4-Foot Aluminum Step Ladder",Step Ladder,6004,2023,WER-6004-23-001,Available,Warehouse,2026-08-20,"456 Oak Ave, Cleveland, OH 44114",,
+"KitchenAid Artisan Series 5-Quart Stand Mixer",Stand Mixer,KSM150PSER,2022,KAD-KSM150-22-001,Available,Warehouse,2025-10-30,"789 Pine Ln, Cincinnati, OH 45202",,
+"KitchenAid Artisan Series 5-Quart Stand Mixer",Stand Mixer,KSM150PSER,2024,KAD-KSM150-24-001,Available,Warehouse,2027-01-01,"101 Maple Dr, Toledo, OH 43604",,
+"Cuisinart 5.5-Quart Stand Mixer",Stand Mixer,SM-50,2023,CUI-SM50-23-001,Available,Warehouse,2026-12-10,"202 Birch Rd, Akron, OH 44308",,
+"KitchenAid Artisan Mini 3.5-Quart Stand Mixer",Stand Mixer,KSM3311X,2023,KAD-KSM3311-23-001,Available,Warehouse,2026-07-30,"303 Cedar Pl, Dayton, OH 45402",,

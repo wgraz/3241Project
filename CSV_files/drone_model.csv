@@ -1,0 +1,43 @@
+weightCap,Year,Model,maxSpeed,maxDist,manufacturer
+10,2022,DJI-FlyCart-30,45,10,DJI
+5,2023,Wing-Cormorant-1,70,6,Wing (Alphabet)
+5,2022,Amazon-MK27-2,50,7,Amazon Prime Air
+4,2023,Zipline-P1,80,10,Zipline
+15,2023,Flytrex-FTX-Gen2,32,6,Flytrex
+4,2022,Matternet-M2,43,12,Matternet
+20,2023,AeroDrone-Cargo-100,55,15,AeroDrone Tech
+50,2024,SkyLift-Heavy-D1,40,8,SkyLift Systems
+30,2023,Condor-Logistics-CL1,60,20,Condor Logistics
+25,2024,Atlas-Unmanned-AU-Cargo,65,18,Atlas Unmanned
+12,2023,DJI-FlyCart-40,45,12,DJI
+6,2024,Wing-Cormorant-2,75,8,Wing (Alphabet)
+5,2023,Amazon-MK30,60,10,Amazon Prime Air
+5,2024,Zipline-P2,85,12,Zipline
+18,2024,Flytrex-FTX-Gen3,35,7,Flytrex
+5,2023,Matternet-M3,45,15,Matternet
+22,2024,AeroDrone-Cargo-150,58,18,AeroDrone Tech
+60,2025,SkyLift-Heavy-D2,42,10,SkyLift Systems
+35,2024,Condor-Logistics-CL2,62,22,Condor Logistics
+28,2025,Atlas-Unmanned-AU-Cargo-2,68,20,Atlas Unmanned
+8,2022,DJI-Matrice-600-Cargo,40,9,DJI
+7,2023,Wing-Pelican-SR,65,5,Wing (Alphabet)
+4,2021,Amazon-MK25,50,6,Amazon Prime Air
+3,2022,Zipline-Sparrow,75,8,Zipline
+12,2022,Flytrex-FTX-Gen1,30,5,Flytrex
+25,2022,AeroDrone-Freight-50,50,14,AeroDrone Tech
+45,2023,SkyLift-Medium-M5,45,11,SkyLift Systems
+28,2022,Condor-Logistics-CL1-Lite,58,19,Condor Logistics
+20,2023,Atlas-Unmanned-AU-Utility,60,15,Atlas Unmanned
+15,2024,DJI-FlyCart-50,50,13,DJI
+5,2024,Wing-Cormorant-2-ER,75,10,Wing (Alphabet)
+6,2024,Amazon-MK30-ER,60,12,Amazon Prime Air
+5,2025,Zipline-P2-LR,85,15,Zipline
+20,2025,Flytrex-FTX-Gen4,40,8,Flytrex
+30,2025,AeroDrone-Cargo-200,60,20,AeroDrone Tech
+70,2025,SkyLift-Heavy-D3,40,12,SkyLift Systems
+40,2025,Condor-Logistics-CL3,65,25,Condor Logistics
+35,2025,Atlas-Unmanned-AU-Cargo-3,70,22,Atlas Unmanned
+10,2023,Matternet-M2-Med,43,14,Matternet
+15,2021,DJI-Agras-CargoMod,35,7,DJI
+40,2022,Condor-Logistics-CL-Alpha,55,18,Condor Logistics
+22,2023,Atlas-Unmanned-AU-Light,70,14,Atlas Unmanned
