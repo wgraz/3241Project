@@ -1,0 +1,30 @@
+-- Query 1: Find the User ID, name, and total amount of rentals that have been placed by each user.
+
+SELECT 
+    Rentals.userID,
+    Members.fName,
+    Members.lName,
+    COUNT(Rentals.serialNum) AS total_rentals
+FROM Rentals 
+JOIN Members ON Rentals.userID=Members.userID
+GROUP BY Rentals.userID, Members.fName, Members.lName
+ORDER BY total_rentals DESC;
+
+-- Query 2: Find the amount of Drones that currently have a fully charged Battery.
+
+SELECT COUNT(*) as fullyChargedDrones
+FROM Drones 
+JOIN Batteries ON Drone.batteryID=Battery.productID
+WHERE Battery.chargedStatus="Full";
+
+-- Query 3: Find the piece of equipment with the highest single rating from its reviews.
+
+SELECT Equipment.serialNum, Equipment.description, topReviews.maxRating
+FROM (
+SELECT Reviews.serialNum, MAX(Reviews.ratings) AS maxRating
+FROM Reviews
+JOIN Equipment ON Equipment.serialNum=Reviews.serialNum
+GROUP BY Reviews.serialNum ) AS topReviews
+JOIN Equipment ON topReviews.serialNum=Equipment.serialNum
+ORDER BY topReviews.maxRating DESC
+LIMIT 1;
