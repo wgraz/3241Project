@@ -1,4 +1,4 @@
-weightCap,year,model,maxSpeed,maxDist,manufacturer
+weightCap,Year,Model,maxSpeed,maxDist,manufacturer
 10,2022,DJI-FlyCart-30,45,10,DJI
 5,2023,Wing-Cormorant-1,70,6,Wing (Alphabet)
 5,2022,Amazon-MK27-2,50,7,Amazon Prime Air

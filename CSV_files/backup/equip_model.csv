@@ -1,4 +1,4 @@
-type,model,year,weight,dimensions,manufacturer
+Type,Model,Year,Weight,Dimensions,manufacturer
 Drill,DCD771C2,2022,3.6,8.2x3.1x9.0,DeWalt
 Drill,DCD771C2,2024,3.4,8.2x3.0x9.0,DeWalt
 Drill,XFD131,2023,3.8,7.0x3.0x9.1,Makita
@@ -26,7 +26,7 @@ Projector,TH575,2022,5.5,11.5x8.5x4.0,BenQ
 Projector,Nebula Solar,2023,2.3,7.5x7.5x2.2,Anker
 Folding Table,22901,2020,25.0,36.0x30.0x3.0,Lifetime
 Folding Table,22901,2022,24.5,36.0x30.0x3.0,Lifetime
-Folding Table,14088PBL1E,2021,26.0,37.0x30.0x3.5,Cosco
+Cosco 6-Foot Folding Table,14088PBL1E,2021,26.0,37.0x30.0x3.5,Cosco
 Folding Table,80160,2023,19.0,30.0x30.0x4.0,Lifetime
 Tent,Sundome 4P,2022,10.2,24.0x7.0x7.0,Coleman
 Tent,Sundome 4P,2024,10.0,24.0x7.0x7.0,Coleman
@@ -36,12 +36,3 @@ Tent,Montana 8P,2022,24.5,27.0x10.0x10.0,Coleman
 Sewing Machine,4423 Heavy Duty,2021,14.5,15.5x6.2x12.0,Singer
 Sewing Machine,4423 Heavy Duty,2023,14.3,15.5x6.2x12.0,Singer
 Sewing Machine,CS6000i,2022,13.0,16.0x6.7x11.4,Brother
-Sewing Machine,M3330,2023,13.6,15.0x7.3x13.5,Singer
-Step Ladder,6006,2022,13.5,72.0x20.0x6.0,Werner
-Step Ladder,GLX-5B,2023,15.0,60.0x19.0x5.0,Gorilla
-Step Ladder,10102,2021,25.0,45.0x24.0x8.0,Little Giant
-Step Ladder,6004,2023,9.0,48.0x18.0x6.0,Werner
-Stand Mixer,KSM150PSER,2022,26.0,14.3x9.3x14.0,KitchenAid
-Stand Mixer,KSM150PSER,2024,25.8,14.3x9.3x14.0,KitchenAid
-Stand Mixer,SM-50,2023,17.0,14.1x7.8x14.1,Cuisinart
-Stand Mixer,KSM3311X,2023,18.0,12.3x7.8x12.3,KitchenAid

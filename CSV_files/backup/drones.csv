@@ -1,4 +1,4 @@
-name,model,serialNum,status,location,year,warehouseAddress,batteryID
+Name,Model,serialNum,Status,Location,Year,Warehouseadress,batteryID
 "Columbus-01","DJI-FlyCart-30","SN-DRN-10001","Idle","123 Main St, Columbus, OH 43215",2022,"123 Main St, Columbus, OH 43215","BAT001"
 "Cleveland-01","Wing-Cormorant-1","SN-DRN-10002","Charging","456 Oak Ave, Cleveland, OH 44114",2023,"456 Oak Ave, Cleveland, OH 44114","BAT002"
 "Cincinnati-01","Amazon-MK27-2","SN-DRN-10003","In-Transit (Delivery)","39.1031,-84.5120",2022,"789 Pine Ln, Cincinnati, OH 45202","BAT003"

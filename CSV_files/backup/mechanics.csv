@@ -1,4 +1,4 @@
-ssn,specialty,email,phoneNum,warehouseNum,address,salary
+SSN,Specialty,Email,phoneNum,warehouseNum,Address,salary
 100-00-0001,Avionics,a.adams@dronerentals.com,(614) 555-1001,"123 Main St, Columbus, OH 43215","101 Riverview Dr, Columbus, OH 43215",78000
 100-00-0002,Propulsion Systems,b.bell@dronerentals.com,(216) 555-1002,"456 Oak Ave, Cleveland, OH 44114","202 Lakeside Ave, Cleveland, OH 44114",82000
 100-00-0003,Navigation Software,c.carter@dronerentals.com,(513) 555-1003,"789 Pine Ln, Cincinnati, OH 45202","303 Hilltop Rd, Cincinnati, OH 45202",85000
@@ -37,5 +37,5 @@ ssn,specialty,email,phoneNum,warehouseNum,address,salary
 200-00-0036,General Maintenance,j.johnson@dronerentals.com,(937) 555-1036,"1515 Lake Aly, Dayton, OH 45406","3636 Linden Ave, Dayton, OH 45406",63000
 200-00-0037,Avionics,k.kelly@dronerentals.com,(614) 555-1037,"1616 Forest St, Columbus, OH 43203","3737 Karl Rd, Columbus, OH 43203",84000
 200-00-0038,Propulsion Systems,l.lopez@dronerentals.com,(216) 555-1038,"1717 Hillside Ave, Cleveland, OH 44111","3838 W 25th St, Cleveland, OH 44111",88000
-200-00-0039,Navigation Software,m.miller@dronerentals.com,(513) 555-1039,"1818 Valley Ln, Cincinnati, OH 45208","3939 Glenway Ave, Cincinnati, OH 45208",91000
+2s00-00-0039,Navigation Software,m.miller@dronerentals.com,(513) 555-1039,"1818 Valley Ln, Cincinnati, OH 45208","3939 Glenway Ave, Cincinnati, OH 45208",91000
 200-00-0040,Battery Maintenance,n.nguyen@dronerentals.com,(419) 555-1040,"1919 Summit Dr, Toledo, OH 43623","4040 Dorr St, Toledo, OH 43623",71000

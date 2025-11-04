@@ -1,4 +1,4 @@
-orderNumber,elementType,Quantity,estArrDate,userID
+orderNumber,elementType,quantity,estArrDate,userID
 50001,1015,1,2025-11-03,12
 50002,1002,2,2025-11-03,5
 50003,1030,1,2025-11-04,22

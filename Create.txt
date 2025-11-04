@@ -1,164 +1,162 @@
 create table Warehouses
-( city char(20) not null,
-address char(30) PRIMARY KEY,
-phone int(12),
-mName char(30) not null,
-storeCap int(9),
-droneCap int(9)
-)
-
-create table Members
-( fname char(30),
-lname char(30),
-address char(40) not null,
-phone int(12),
-email char(100) not null,
-startDate char(20),
-userID char(50) PRIMARY KEY,
-FOREIGN KEY (address) REFERENCES Address(address)
-)
+( city varchar(20) not null,
+  address varchar(30) PRIMARY KEY,
+  phone varchar(20),
+  mName varchar(30) not null,
+  storeCap int,
+  droneCap int
+);
 
 create table Address
-( address char(40) not null,
-userDist double
-)
+( address varchar(40) PRIMARY KEY,
+  userDist double
+);
 
-create table Drones
-( name char(30),
-model char(30) not null,
-serialNum char(20) PRIMARY KEY,
-status char not null,
-location char(30), 
-year int(4),
-WarehouseAddress char(30) not null,
-BatteryID int(9),
-FOREIGN KEY (model) REFERENCES Drone_Model(model),
-FOREIGN KEY (year) REFERENCES Drone_Model(year),
-FOREIGN KEY (WarehouseAddress) REFERENCES Warehouses(address),
-FOREIGN KEY (BatteryID) REFERENCES Batteries(productID)
-)
+create table Members
+( fname varchar(30),
+  lname varchar(30),
+  address varchar(40) not null,
+  phone varchar(20),
+  email varchar(100) not null,
+  startDate varchar(20),
+  userID varchar(50) PRIMARY KEY,
+  FOREIGN KEY (address) REFERENCES Address(address)
+);
 
 create table Drone_Model
-( weightCap int(6),
-year int(4) not null,
-model char(15) not null,
-maxSpeed int(3),
-maxDist int (9),
-manufacturer char(30),
-PRIMARY KEY (year, model)
-)
-
-create table Rentals
-( serialNum char(20) not null,
-userID char(30) not null,
-checkOutID char(30) PRIMARY KEY,
-dueDate char(20),
-rentalFees double,
-Returns char(50),
-FOREIGN KEY (serialNum) REFERENCES Equipment(serialNum),
-FOREIGN KEY (userID) REFERENCES Members(userID)
-)
-
-create table Orders
-( orderNumber int(15) PRIMARY KEY,
-elementType char(20),
-Quantity int(12) not null,
-estArrDate char(20),
-actArrDate char(20),
-userID char(20),
-FOREIGN KEY (elementType) REFERENCES Order_Price(elementType),
-FOREIGN KEY (Quantity) REFERENCES Order_Price(quantity),
-FOREIGN KEY (userID) REFERENCES Members(userID)
-)
-
-create table Order_Price
-( elementType char(20) not null,
-quantity int(12) not null,
-value double
-)
-
-create table Equipment
-( description char(500),
-type char(20) not null,
-model char(30),
-year char(20) not null,
-serialNum char(20) PRIMARY KEY,
-status char(15),
-location char(30),
-warExp char(30),
-warehouseAddress char(30) not null,
-orderNum int(15) not null,
-renterID char(20) not null,
-FOREIGN KEY (type) REFERENCES Equip_Model(type),
-FOREIGN KEY (year) REFERENCES Equip_Model(year),
-FOREIGN KEY (warehouseAddress) REFERENCES Warehouses(address),
-FOREIGN KEY (orderNum) REFERENCES Orders(orderNumber),
-FOREIGN KEY (renterID) REFERENCES Members(userID)
-)
-
-create table Equip_Model
-( type char(20) not null,
-model char(30) not null,
-year char(20) not null,
-weight int(9),
-dimensions char(50),
-manufacturer char(30),
-PRIMARY KEY (type, model, year)
-)
-
-create table Reviews
-( serialNum char(20) not null,
-userID char(50) not null,
-comments char(500),
-ratings double,
-PRIMARY KEY(serialNum, userID, comments, ratings),
-FOREIGN KEY(serialNum) REFERENCES Equipment(serialNum),
-FOREIGN KEY(userID) REFERENCES Members(userID)
-)
-
-create table Mechanics
-( SSN int(20) PRIMARY KEY,
-Specialty char(20),
-Email char(50) not null,
-phoneNum int(15),
-warehouseNum int(9),
-address char(30),
-salary int(9)
-)
-
-create table Batteries
-( productID PRIMARY KEY,
-storageAMT int(15),
-chargedStatus char(15),
-type char(20) not null,
-FOREIGN KEY(type) REFERENCES Battery_Type(type)
-)
+( weightCap int,
+  year SMALLINT not null,
+  model varchar(15) not null,
+  maxSpeed int,
+  maxDist int,
+  manufacturer varchar(30),
+  PRIMARY KEY (year, model)
+);
 
 create table Battery_Type
-( type char(20) PRIMARY KEY,
-voltage double not null
-)
+( type varchar(20) PRIMARY KEY,
+  voltage double not null
+);
+
+create table Batteries
+( productID int PRIMARY KEY,
+  storageAMT BIGINT,
+  chargedStatus varchar(15),
+  type varchar(20) not null,
+  FOREIGN KEY(type) REFERENCES Battery_Type(type)
+);
+
+create table Drones
+( name varchar(30),
+  model varchar(15) not null,
+  serialNum varchar(20) PRIMARY KEY,
+  status char(1) not null,
+  location varchar(30), 
+  year SMALLINT,
+  warehouseAddress varchar(30) not null,
+  batteryID int,
+  FOREIGN KEY (model, year) REFERENCES Drone_Model(model, year),
+  FOREIGN KEY (warehouseAddress) REFERENCES Warehouses(address),
+  FOREIGN KEY (batteryID) REFERENCES Batteries(productID)
+);
+
+create table Order_Price
+( elementType varchar(20) not null,
+  quantity BIGINT not null,
+  value DECIMAL(10, 2),
+  PRIMARY KEY (elementType, quantity)
+);
+
+create table Orders
+( orderNumber BIGINT PRIMARY KEY,
+  elementType varchar(20),
+  quantity BIGINT not null,
+  estArrDate varchar(20),
+  actArrDate varchar(20),
+  userID varchar(50),
+  FOREIGN KEY (elementType, quantity) REFERENCES Order_Price(elementType, quantity),
+  FOREIGN KEY (userID) REFERENCES Members(userID)
+);
+
+create table Equip_Model
+( type varchar(20) not null,
+  model varchar(30) not null,
+  year SMALLINT not null,
+  weight int,
+  dimensions varchar(50),
+  manufacturer varchar(30),
+  PRIMARY KEY (type, model, year)
+);
+
+create table Equipment
+( description varchar(500),
+  type varchar(20) not null,
+  model varchar(30),
+  year SMALLINT not null,
+  serialNum varchar(20) PRIMARY KEY,
+  status varchar(15),
+  location varchar(30),
+  warExp varchar(30),
+  warehouseAddress varchar(30) not null,
+  orderNum BIGINT not null,
+  renterID varchar(50) not null,
+  FOREIGN KEY (type, model, year) REFERENCES Equip_Model(type, model, year),
+  FOREIGN KEY (warehouseAddress) REFERENCES Warehouses(address),
+  FOREIGN KEY (orderNum) REFERENCES Orders(orderNumber),
+  FOREIGN KEY (renterID) REFERENCES Members(userID)
+);
+
+create table Rentals
+( serialNum varchar(20) not null,
+  userID varchar(50) not null,
+  checkOutID varchar(30) PRIMARY KEY,
+  dueDate varchar(20),
+  rentalFees DECIMAL(10, 2),
+  returns varchar(50),
+  FOREIGN KEY (serialNum) REFERENCES Equipment(serialNum),
+  FOREIGN KEY (userID) REFERENCES Members(userID)
+);
+
+create table Reviews
+( serialNum varchar(20) not null,
+  userID varchar(50) not null,
+  comments varchar(500),
+  ratings DECIMAL(3, 1),
+  PRIMARY KEY(serialNum, userID, comments, ratings),
+  FOREIGN KEY(serialNum) REFERENCES Equipment(serialNum),
+  FOREIGN KEY(userID) REFERENCES Members(userID)
+);
+
+create table Mechanics
+( ssn varchar(20) PRIMARY KEY,
+  specialty varchar(20),
+  email varchar(50) not null,
+  phoneNum varchar(20),
+  warehouseNum int,
+  address varchar(30),
+  salary DECIMAL(10, 2)
+);
 
 create table Repair
-( MechSSN char(15) not null,
-DroneSN char(15) not null,
-PRIMARY KEY(MechSSN, DroneSN),
-FOREIGN KEY(MechSSN) REFERENCES Mechanics(SSN),
-FOREIGN KEY(DroneSN) REFERENCES Drones(serialNum)
-)
+( mechSSN varchar(20) not null,
+  droneSN varchar(20) not null,
+  PRIMARY KEY(mechSSN, droneSN),
+  FOREIGN KEY(mechSSN) REFERENCES Mechanics(ssn),
+  FOREIGN KEY(droneSN) REFERENCES Drones(serialNum)
+);
 
 create table Rent
-( Checkouts int(9) not null,
-SerialNum char(15) not null,
-PRIMARY KEY(Checkouts,SerialNum),
-FOREIGN KEY(Checkouts) REFERENCES Rentals(userID),
-FOREIGN KEY(SerialNum) REFERENCES Equipment(serialNum) 
-)
+( checkouts varchar(30) not null,
+  serialNum varchar(20) not null,
+  PRIMARY KEY(checkouts,serialNum),
+  FOREIGN KEY(checkouts) REFERENCES Rentals(checkOutID),
+  FOREIGN KEY(serialNum) REFERENCES Equipment(serialNum)s
+);
 
 create table Transports
-( dSerialNum char(15) not null,
-eSerialNum char(15) not null,
-PRIMARY KEY(dSerialNum, eSerialNum),
-FOREIGN KEY(dSerialNum) REFERENCES Drones(serialNum),
-FOREIGN KEY(eSerialNum) REFERENCES Equipment(serialNum)
-)
+( dSerialNum varchar(20) not null,
+  eSerialNum varchar(20) not null,
+  PRIMARY KEY(dSerialNum, eSerialNum),
+  FOREIGN KEY(dSerialNum) REFERENCES Drones(serialNum),
+  FOREIGN KEY(eSerialNum) REFERENCES Equipment(serialNum)
+);
