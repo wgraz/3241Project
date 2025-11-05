@@ -52,9 +52,11 @@ ORDER BY totalItems DESC
 LIMIT 1;
 
 -- Find the total quantity of Equipment purchases in the last 6 months by equipment type, provide the total dollar amount for each type and the average weight. 
-SELECT E.type, COUNT(*), SUM(E.price), AVG(E.weight)
+SELECT E.type, COUNT(*), SUM(R.rentalFees), AVG(EP.weight)
 FROM Equipment AS E
 JOIN Rentals R ON E.serialNum=R.serialNum
-WHERE R.checkOutDate >= DATE('now', '-6 months')
+JOIN Equip_Model EP ON E.type=EP.type
+WHERE R.dueDate >= DATE('now', '-6 months')
 GROUP BY E.type;
+
 
