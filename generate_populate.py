@@ -110,7 +110,7 @@ SCHEMA_DEFINITION = {
     },
     'repair': { # Matches 'repair.csv'
         'mechSSN': 'string',
-        'droneSSN': 'string'
+        'droneSN': 'string'
     },
     'rent': { # Matches 'rent.csv'
         'checkouts': 'string',

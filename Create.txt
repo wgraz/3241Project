@@ -150,7 +150,7 @@ create table Rent
   serialNum varchar(20) not null,
   PRIMARY KEY(checkouts,serialNum),
   FOREIGN KEY(checkouts) REFERENCES Rentals(checkOutID),
-  FOREIGN KEY(serialNum) REFERENCES Equipment(serialNum)s
+  FOREIGN KEY(serialNum) REFERENCES Equipment(serialNum)
 );
 
 create table Transports
