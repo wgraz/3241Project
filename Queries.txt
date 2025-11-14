@@ -59,4 +59,3 @@ JOIN Equip_Model EP ON E.type=EP.type
 WHERE R.dueDate >= DATE('now', '-6 months')
 GROUP BY E.type;
 
-
