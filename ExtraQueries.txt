@@ -14,8 +14,8 @@ ORDER BY total_rentals DESC;
 
 SELECT COUNT(*) as fullyChargedDrones
 FROM Drones 
-JOIN Batteries ON Drone.batteryID=Battery.productID
-WHERE Battery.chargedStatus="Full";
+JOIN Batteries ON Drones.batteryID=Batteries.productID
+WHERE Batteries.chargedStatus="Full";
 
 -- Query 3: Find the piece of equipment with the highest single rating from its reviews.
 

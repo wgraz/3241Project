@@ -2,36 +2,37 @@
 SELECT E.type, E.year, Em.manufacturer
 FROM Equipment AS E
 JOIN Equip_Model AS Em ON E.type=Em.type AND E.year=Em.year
-WHERE Em.manufacturer='manufacturer' AND E.year > 2000; -- can change year and manufacturer to anything
+WHERE Em.manufacturer='DeWalt' AND E.year > 2000; -- can change year and manufacturer to anything
 
 -- Give all the equipment and the date(s) of their checkout from a single MEMBER (you choose how to designate the member). 
 SELECT M.userID, E.serialNum, E.description, E.model, R.checkOutID AS checkoutDate
 FROM Rentals AS R
 JOIN Equipment AS E ON R.serialNum=E.serialNum
 JOIN Members AS M ON R.userID=M.userID
-WHERE M.userID='123456'; --can change to any userID
+WHERE M.userID='32'; --can change to any userID
 
 -- List all drones by weight capacity and its unique identifiers with 2 or less units held by a WAREHOUSE (you choose how to designate the warehouse). 
-SELECT Dm.serialNum, Dm.weightCap, Dm.model, W.Address
+SELECT D.serialNum, Dm.weightCap
 FROM Drones AS D 
 JOIN Drone_Model AS Dm ON D.model=Dm.model
-WHERE d.WareHouseAddress = '123 Imaginary Blvd' -- can change warehouse address
+WHERE d.WareHouseAddress = '123 Main St, Columbus, OH 43215'
 AND D.model IN (
 SELECT Drones.model
 FROM Drones
-WHERE Drones.address = '123 Imaginary Blvd'
+WHERE Drones.WareHouseAddress = '123 Main St, Columbus, OH 43215'
 GROUP BY Drones.model
 HAVING COUNT(*) <=2)
 ORDER BY Dm.model, D.serialNum;
 
 -- Give all the members that live more than 15 miles away from the warehouse who checked out equipment delivered by a particular DRONE (you choose how to designate the drone), as well as the equipment they checked out. 
-SELECT M.fName, M.lName, M.userID, E.serialNum, E.description, E.model
+SELECT M.fName, M.lName, M.userID, E.serialNum
 FROM Members AS M 
 JOIN Rentals AS R ON M.userID=R.userID
 JOIN Equipment AS E ON R.serialNum=E.serialNum
 JOIN Transports AS T ON E.serialNum=T.eSerialNum
 JOIN Drones AS D ON T.dSerialNum=D.serialNum
-WHERE M.userDist > 15 AND D.serialNum='DRN123';
+JOIN Address AS A ON M.address = A.address
+WHERE A.userDist > 2.0 AND D.serialNum='SN-DRN-10003';
 
 -- Find the total number of unique drones that have picked up items checked out on certain Address (you choose how to designate the member address). 
 SELECT COUNT(DISTINCT D.serialNum)
@@ -40,7 +41,7 @@ JOIN Transports AS T ON D.serialNum=T.dSerialNum
 JOIN Equipment AS E ON T.eSerialNum=E.serialNum
 JOIN Rentals AS R ON R.serialNum=E.serialNum
 JOIN Members AS M ON R.userId=M.userID
-WHERE M.address='123 Imaginary Blvd'; -- can change address to anything
+WHERE M.address='123 Main St, Columbus, OH 43215'; -- can change address to anything
 
 -- Find the member who has checked out the most equipment and the total number of items they have checked out. 
 SELECT M.userID, M.fName, M.lName, COUNT(R.serialNum) AS totalItems
@@ -51,8 +52,11 @@ ORDER BY totalItems DESC
 LIMIT 1;
 
 -- Find the total quantity of Equipment purchases in the last 6 months by equipment type, provide the total dollar amount for each type and the average weight. 
-SELECT E.type, COUNT(*), SUM(E.price), AVG(E.weight)
+SELECT E.type, COUNT(*), SUM(R.rentalFees), AVG(EP.weight)
 FROM Equipment AS E
 JOIN Rentals R ON E.serialNum=R.serialNum
-WHERE R.checkOutDate >= DATE('now', '-6 months')
+JOIN Equip_Model EP ON E.type=EP.type
+WHERE R.dueDate >= DATE('now', '-6 months')
 GROUP BY E.type;
+
+

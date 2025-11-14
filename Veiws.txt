@@ -1,0 +1,17 @@
+CREATE VIEW EquipAvgRating AS
+SELECT Equipment.type, AVG(Reviews.ratings) AS avgRating
+FROM (Equipment JOIN Reviews ON Equipment.serialNum = Reviews.serialNum)
+GROUP BY Equipment.type;
+
+CREATE VIEW DroneMaxRepairs AS 
+SELECT Repair.DroneSN, COUNT(*) AS numRepairs
+FROM Repair
+GROUP BY Repair.DroneSN
+HAVING COUNT(*) = (
+	SELECT MAX(droneCount)
+	FROM (
+SELECT COUNT(*) AS droneCount
+FROM Repair
+GROUP BY DroneSN
+) AS RepairCounts
+);
