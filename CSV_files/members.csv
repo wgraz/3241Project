@@ -1,4 +1,4 @@
-fname,lname,address,phone,email,startDate,userID
+fname,lname,Address,phone,email,startDate,userID
 Liam,Smith,"123 N High St, Columbus, OH, 43201",614-555-0101,liam.smith@example.com,2022-03-15,1
 Olivia,Johnson,"456 E Broad St, Columbus, OH, 43203",614-555-0102,olivia.johnson@example.com,2021-07-22,2
 Noah,Williams,"789 W Lane Ave, Columbus, OH, 43210",614-555-0103,noah.williams@example.com,2023-01-10,3

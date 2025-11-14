@@ -1,4 +1,4 @@
-type, voltage
+type,voltage
 LiPo-1S-30C,3.7
 LiPo-1S-HV-50C,3.8
 LiPo-2S-25C,7.4
@@ -25,7 +25,7 @@ LiHV-4S-75C,15.2
 LiHV-4S-100C,15.2
 LiPo-5S-30C,18.5
 LiPo-5S-50C,18.5
-LiHV-5S-70C,19.0
+LiHV-5S-70C,19
 LiPo-6S-25C,22.2
 LiPo-6S-35C,22.2
 LiPo-6S-50C,22.2
@@ -34,7 +34,7 @@ LiPo-6S-95C,22.2
 LiPo-6S-120C,22.2
 LiHV-6S-100C,22.8
 LiPo-8S-30C,29.6
-LiPo-10S-25C,37.0
+LiPo-10S-25C,37
 LiPo-12S-25C,44.4
 Li-Ion-2S-LR,7.2
 Li-Ion-3S-LR,10.8
@@ -46,6 +46,6 @@ LiFe-4S-GND,12.8
 NiMH-4S-TX,4.8
 NiMH-6S-TX,7.2
 NiMH-8S-TX,9.6
-Alkaline-4xAA-TX,6.0
-Alkaline-8xAA-TX,12.0
-Alkaline-9V-TX,9.0
+Alkaline-4xAA-TX,6
+Alkaline-8xAA-TX,12
+Alkaline-9V-TX,9

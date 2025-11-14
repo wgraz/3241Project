@@ -4,7 +4,7 @@ address,userDist
 "789 W Lane Ave, Columbus, OH, 43210",4.1
 "321 S Grant Ave, Columbus, OH, 43215",0.9
 "550 E Town St, Columbus, OH, 43215",1.2
-"1010 Neil Ave, Columbus, OH, 43201",3.0
+"1010 Neil Ave, Columbus, OH, 43201",3
 "2000 Kenny Rd, Columbus, OH, 43220",5.5
 "150 E Main St, Westerville, OH, 43081",14.2
 "67 S State St, Westerville, OH, 43081",14.8
@@ -27,19 +27,19 @@ address,userDist
 "4200 Morse Rd, Gahanna, OH, 43230",11.3
 "130 S High St, Gahanna, OH, 43230",10.8
 "6500 E Main St, Reynoldsburg, OH, 43068",13.5
-"2200 W Dublin Granville Rd, Worthington, OH, 43085",11.0
+"2200 W Dublin Granville Rd, Worthington, OH, 43085",11
 "700 Hutchinson Ave, Worthington, OH, 43085",10.5
 "50 W Town St, Columbus, OH, 43215",1.1
 "1600 S High St, Columbus, OH, 43207",3.4
 "3100 N High St, Columbus, OH, 43202",4.2
-"1400 W 5th Ave, Columbus, OH, 43212",4.0
+"1400 W 5th Ave, Columbus, OH, 43212",4
 "42 S 4th St, Columbus, OH, 43215",0.7
 "900 N 4th St, Columbus, OH, 43201",2.1
-"5000 N Hamilton Rd, Columbus, OH, 43230",13.0
+"5000 N Hamilton Rd, Columbus, OH, 43230",13
 "3500 W Henderson Rd, Columbus, OH, 43220",8.8
 "1700 E Dublin Granville Rd, Columbus, OH, 43229",10.1
 "250 W Bridge St, Dublin, OH, 43017",15.5
-"7500 E Main St, Reynoldsburg, OH, 43068",14.0
+"7500 E Main St, Reynoldsburg, OH, 43068",14
 "6000 E Broad St, Columbus, OH, 43213",9.7
 "20 E 1st Ave, Columbus, OH, 43201",2.8
 "5500 N High St, Worthington, OH, 43085",9.5

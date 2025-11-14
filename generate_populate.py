@@ -1,6 +1,6 @@
 import os
 import csv
-
+# THIS IS JUST A HELPER SCRIPT AND IT DOES NOT COMPLETLY HANDLE ALL CASES JUST LAYS FOUNDATION FOR POPULATE
 SCHEMA_DEFINITION = {
     'warehouses': { # Matches 'warehouses.csv'
         'city': 'string',
@@ -36,7 +36,7 @@ SCHEMA_DEFINITION = {
         'voltage': 'numeric'
     },
     'batteries': { # Matches 'batteries.csv'
-        'productID': 'numeric',
+        'productID': 'string',
         'storageAMT': 'numeric',
         'chargedStatus': 'string',
         'type': 'string'
@@ -49,7 +49,7 @@ SCHEMA_DEFINITION = {
         'location': 'string',
         'year': 'numeric',
         'WarehouseAddress': 'string',
-        'BatteryID': 'numeric'
+        'BatteryID': 'string'
     },
     'order_price': { # Matches 'order_price.csv'
         'elementType': 'string',
@@ -110,7 +110,7 @@ SCHEMA_DEFINITION = {
     },
     'repair': { # Matches 'repair.csv'
         'mechSSN': 'string',
-        'droneSN': 'string'
+        'droneSSN': 'string'
     },
     'rent': { # Matches 'rent.csv'
         'checkouts': 'string',

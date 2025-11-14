@@ -1,41 +1,41 @@
 name,model,serialNum,status,location,year,warehouseAddress,batteryID
-"Columbus-01","DJI-FlyCart-30","SN-DRN-10001","Idle","123 Main St, Columbus, OH 43215",2022,"123 Main St, Columbus, OH 43215","BAT001"
-"Cleveland-01","Wing-Cormorant-1","SN-DRN-10002","Charging","456 Oak Ave, Cleveland, OH 44114",2023,"456 Oak Ave, Cleveland, OH 44114","BAT002"
-"Cincinnati-01","Amazon-MK27-2","SN-DRN-10003","In-Transit (Delivery)","39.1031,-84.5120",2022,"789 Pine Ln, Cincinnati, OH 45202","BAT003"
-"Toledo-01","Zipline-P1","SN-DRN-10004","Maintenance","101 Maple Dr, Toledo, OH 43604",2023,"101 Maple Dr, Toledo, OH 43604","BAT004"
-"Akron-01","Flytrex-FTX-Gen2","SN-DRN-10005","In-Transit (Pickup)","41.0814,-81.5190",2023,"202 Birch Rd, Akron, OH 44308","BAT005"
-"Dayton-01","Matternet-M2","SN-DRN-10006","Offline","303 Cedar Pl, Dayton, OH 45402",2022,"303 Cedar Pl, Dayton, OH 45402","BAT006"
-"Columbus-02","AeroDrone-Cargo-100","SN-DRN-10007","Idle","404 Elm Blvd, Columbus, OH 43201",2023,"404 Elm Blvd, Columbus, OH 43201","BAT007"
-"Cleveland-02","SkyLift-Heavy-D1","SN-DRN-10008","Charging","505 Spruce Way, Cleveland, OH 44115",2024,"505 Spruce Way, Cleveland, OH 44115","BAT008"
-"Cincinnati-02","Condor-Logistics-CL1","SN-DRN-10009","In-Transit (Delivery)","39.1620,-84.4569",2023,"606 Ash Ct, Cincinnati, OH 45203","BAT009"
-"Toledo-02","Atlas-Unmanned-AU-Cargo","SN-DRN-10010","Maintenance","707 Willow Bend, Toledo, OH 43606",2024,"707 Willow Bend, Toledo, OH 43606","BAT010"
-"Akron-02","DJI-FlyCart-40","SN-DRN-10011","In-Transit (Pickup)","41.1415,-81.5178",2023,"808 Poplar St, Akron, OH 44304","BAT011"
-"Dayton-02","Wing-Cormorant-2","SN-DRN-10012","Offline","909 Redwood Aly, Dayton, OH 45403",2024,"909 Redwood Aly, Dayton, OH 45403","BAT012"
-"Columbus-03","Amazon-MK30","SN-DRN-10013","Idle","111 Chestnut St, Columbus, OH 43210",2023,"111 Chestnut St, Columbus, OH 43210","BAT013"
-"Cleveland-03","Zipline-P2","SN-DRN-10014","Charging","222 Sycamore Ave, Cleveland, OH 44113",2024,"222 Sycamore Ave, Cleveland, OH 44113","BAT014"
-"Cincinnati-03","Flytrex-FTX-Gen3","SN-DRN-10015","In-Transit (Delivery)","39.1031,-84.5120",2024,"333 Cypress Ln, Cincinnati, OH 45204","BAT015"
-"Toledo-03","Matternet-M3","SN-DRN-10016","Maintenance","444 Juniper Dr, Toledo, OH 43608",2023,"444 Juniper Dr, Toledo, OH 43608","BAT016"
-"Akron-03","AeroDrone-Cargo-150","SN-DRN-10017","In-Transit (Pickup)","41.0814,-81.5190",2024,"555 Hemlock Rd, Akron, OH 44311","BAT017"
-"Dayton-03","SkyLift-Heavy-D2","SN-DRN-10018","Offline","666 Holly Pl, Dayton, OH 45410",2025,"666 Holly Pl, Dayton, OH 45410","BAT018"
-"Columbus-04","Condor-Logistics-CL2","SN-DRN-10019","Idle","777 Sequoia Blvd, Columbus, OH 43212",2024,"777 Sequoia Blvd, Columbus, OH 43212","BAT019"
-"Cleveland-04","Atlas-Unmanned-AU-Cargo-2","SN-DRN-10020","Charging","888 Magnolia Way, Cleveland, OH 44102",2025,"888 Magnolia Way, Cleveland, OH 44102","BAT020"
-"Cincinnati-04","DJI-Matrice-600-Cargo","SN-DRN-10021","In-Transit (Delivery)","39.1620,-84.4569",2022,"999 Dogwood Ct, Cincinnati, OH 45205","BAT021"
-"Toledo-04","Wing-Pelican-SR","SN-DRN-10022","Maintenance","121 Ironwood Bend, Toledo, OH 43614",2023,"121 Ironwood Bend, Toledo, OH 43614","BAT022"
-"Akron-04","Amazon-MK25","SN-DRN-10023","In-Transit (Pickup)","41.1415,-81.5178",2021,"232 Aspen St, Akron, OH 44303","BAT023"
-"Dayton-04","Zipline-Sparrow","SN-DRN-10024","Offline","343 Beech Aly, Dayton, OH 45404",2022,"343 Beech Aly, Dayton, OH 45404","BAT024"
-"Columbus-05","Flytrex-FTX-Gen1","SN-DRN-10025","Idle","454 Larch St, Columbus, OH 43214",2022,"454 Larch St, Columbus, OH 43214","BAT025"
-"Cleveland-05","AeroDrone-Freight-50","SN-DRN-10026","Charging","565 Elder Ave, Cleveland, OH 44106",2022,"565 Elder Ave, Cleveland, OH 44106","BAT026"
-"Cincinnati-05","SkyLift-Medium-M5","SN-DRN-10027","In-Transit (Delivery)","39.1031,-84.5120",2023,"676 Fir Ln, Cincinnati, OH 45206","BAT027"
-"Toledo-05","Condor-Logistics-CL1-Lite","SN-DRN-10028","Maintenance","787 Pinecone Dr, Toledo, OH 43615",2022,"787 Pinecone Dr, Toledo, OH 43615","BAT028"
-"Akron-05","Atlas-Unmanned-AU-Utility","SN-DRN-10029","In-Transit (Pickup)","41.0814,-81.5190",2023,"898 Yew Rd, Akron, OH 44313","BAT029"
-"Dayton-05","DJI-FlyCart-50","SN-DRN-10030","Offline","901 Hawthorn Pl, Dayton, OH 45405",2024,"901 Hawthorn Pl, Dayton, OH 45405","BAT030"
-"Columbus-06","Wing-Cormorant-2-ER","SN-DRN-10031","Idle","1010 Orchard Blvd, Columbus, OH 43202",2024,"1010 Orchard Blvd, Columbus, OH 43202","BAT031"
-"Cleveland-06","Amazon-MK30-ER","SN-DRN-10032","Charging","1111 Grove Way, Cleveland, OH 44109",2024,"1111 Grove Way, Cleveland, OH 44109","BAT032"
-"Cincinnati-06","Zipline-P2-LR","SN-DRN-10033","In-Transit (Delivery)","39.1620,-84.4569",2025,"1212 Park Ct, Cincinnati, OH 45207","BAT033"
-"Toledo-06","Flytrex-FTX-Gen4","SN-DRN-10034","Maintenance","1313 River Bend, Toledo, OH 43620",2025,"1313 River Bend, Toledo, OH 43620","BAT034"
-"Akron-06","AeroDrone-Cargo-200","SN-DRN-10035","In-Transit (Pickup)","41.1415,-81.5178",2025,"1414 Meadow St, Akron, OH 44301","BAT035"
-"Dayton-06","SkyLift-Heavy-D3","SN-DRN-10036","Offline","1515 Lake Aly, Dayton, OH 45406",2025,"1515 Lake Aly, Dayton, OH 45406","BAT036"
-"Columbus-07","Condor-Logistics-CL3","SN-DRN-10037","Idle","1616 Forest St, Columbus, OH 43203",2025,"1616 Forest St, Columbus, OH 43203","BAT037"
-"Cleveland-07","Atlas-Unmanned-AU-Cargo-3","SN-DRN-10038","Charging","1717 Hillside Ave, Cleveland, OH 44111",2025,"1717 Hillside Ave, Cleveland, OH 44111","BAT038"
-"Cincinnati-07","Matternet-M2-Med","SN-DRN-10039","In-Transit (Delivery)","39.1031,-84.5120",2023,"1818 Valley Ln, Cincinnati, OH 45208","BAT039"
-"Toledo-07","DJI-Agras-CargoMod","SN-DRN-10040","Maintenance","1919 Summit Dr, Toledo, OH 43623",2021,"1919 Summit Dr, Toledo, OH 43623","BAT040"
+Columbus-01,DJI-FlyCart-30,SN-DRN-10001,Idle,"123 Main St, Columbus, OH 43215",2022,"123 Main St, Columbus, OH 43215",BAT001
+Cleveland-01,Wing-Cormorant-1,SN-DRN-10002,Charging,"456 Oak Ave, Cleveland, OH 44114",2023,"456 Oak Ave, Cleveland, OH 44114",BAT002
+Cincinnati-01,Amazon-MK27-2,SN-DRN-10003,In-Transit (Delivery),"39.1031,-84.5120",2022,"789 Pine Ln, Cincinnati, OH 45202",BAT003
+Toledo-01,Zipline-P1,SN-DRN-10004,Maintenance,"101 Maple Dr, Toledo, OH 43604",2023,"101 Maple Dr, Toledo, OH 43604",BAT004
+Akron-01,Flytrex-FTX-Gen2,SN-DRN-10005,In-Transit (Pickup),"41.0814,-81.5190",2023,"202 Birch Rd, Akron, OH 44308",BAT005
+Dayton-01,Matternet-M2,SN-DRN-10006,Offline,"303 Cedar Pl, Dayton, OH 45402",2022,"303 Cedar Pl, Dayton, OH 45402",BAT006
+Columbus-02,AeroDrone-Cargo-100,SN-DRN-10007,Idle,"404 Elm Blvd, Columbus, OH 43201",2023,"404 Elm Blvd, Columbus, OH 43201",BAT007
+Cleveland-02,SkyLift-Heavy-D1,SN-DRN-10008,Charging,"505 Spruce Way, Cleveland, OH 44115",2024,"505 Spruce Way, Cleveland, OH 44115",BAT008
+Cincinnati-02,Condor-Logistics-CL1,SN-DRN-10009,In-Transit (Delivery),"39.1620,-84.4569",2023,"606 Ash Ct, Cincinnati, OH 45203",BAT009
+Toledo-02,Atlas-Unmanned-AU-Cargo,SN-DRN-10010,Maintenance,"707 Willow Bend, Toledo, OH 43606",2024,"707 Willow Bend, Toledo, OH 43606",BAT010
+Akron-02,DJI-FlyCart-40,SN-DRN-10011,In-Transit (Pickup),"41.1415,-81.5178",2023,"808 Poplar St, Akron, OH 44304",BAT011
+Dayton-02,Wing-Cormorant-2,SN-DRN-10012,Offline,"909 Redwood Aly, Dayton, OH 45403",2024,"909 Redwood Aly, Dayton, OH 45403",BAT012
+Columbus-03,Amazon-MK30,SN-DRN-10013,Idle,"111 Chestnut St, Columbus, OH 43210",2023,"111 Chestnut St, Columbus, OH 43210",BAT013
+Cleveland-03,Zipline-P2,SN-DRN-10014,Charging,"222 Sycamore Ave, Cleveland, OH 44113",2024,"222 Sycamore Ave, Cleveland, OH 44113",BAT014
+Cincinnati-03,Flytrex-FTX-Gen3,SN-DRN-10015,In-Transit (Delivery),"39.1031,-84.5120",2024,"333 Cypress Ln, Cincinnati, OH 45204",BAT015
+Toledo-03,Matternet-M3,SN-DRN-10016,Maintenance,"444 Juniper Dr, Toledo, OH 43608",2023,"444 Juniper Dr, Toledo, OH 43608",BAT016
+Akron-03,AeroDrone-Cargo-150,SN-DRN-10017,In-Transit (Pickup),"41.0814,-81.5190",2024,"555 Hemlock Rd, Akron, OH 44311",BAT017
+Dayton-03,SkyLift-Heavy-D2,SN-DRN-10018,Offline,"666 Holly Pl, Dayton, OH 45410",2025,"666 Holly Pl, Dayton, OH 45410",BAT018
+Columbus-04,Condor-Logistics-CL2,SN-DRN-10019,Idle,"777 Sequoia Blvd, Columbus, OH 43212",2024,"777 Sequoia Blvd, Columbus, OH 43212",BAT019
+Cleveland-04,Atlas-Unmanned-AU-Cargo-2,SN-DRN-10020,Charging,"888 Magnolia Way, Cleveland, OH 44102",2025,"888 Magnolia Way, Cleveland, OH 44102",BAT020
+Cincinnati-04,DJI-Matrice-600-Cargo,SN-DRN-10021,In-Transit (Delivery),"39.1620,-84.4569",2022,"999 Dogwood Ct, Cincinnati, OH 45205",BAT021
+Toledo-04,Wing-Pelican-SR,SN-DRN-10022,Maintenance,"121 Ironwood Bend, Toledo, OH 43614",2023,"121 Ironwood Bend, Toledo, OH 43614",BAT022
+Akron-04,Amazon-MK25,SN-DRN-10023,In-Transit (Pickup),"41.1415,-81.5178",2021,"232 Aspen St, Akron, OH 44303",BAT023
+Dayton-04,Zipline-Sparrow,SN-DRN-10024,Offline,"343 Beech Aly, Dayton, OH 45404",2022,"343 Beech Aly, Dayton, OH 45404",BAT024
+Columbus-05,Flytrex-FTX-Gen1,SN-DRN-10025,Idle,"454 Larch St, Columbus, OH 43214",2022,"454 Larch St, Columbus, OH 43214",BAT025
+Cleveland-05,AeroDrone-Freight-50,SN-DRN-10026,Charging,"565 Elder Ave, Cleveland, OH 44106",2022,"565 Elder Ave, Cleveland, OH 44106",BAT026
+Cincinnati-05,SkyLift-Medium-M5,SN-DRN-10027,In-Transit (Delivery),"39.1031,-84.5120",2023,"676 Fir Ln, Cincinnati, OH 45206",BAT027
+Toledo-05,Condor-Logistics-CL1-Lite,SN-DRN-10028,Maintenance,"787 Pinecone Dr, Toledo, OH 43615",2022,"787 Pinecone Dr, Toledo, OH 43615",BAT028
+Akron-05,Atlas-Unmanned-AU-Utility,SN-DRN-10029,In-Transit (Pickup),"41.0814,-81.5190",2023,"898 Yew Rd, Akron, OH 44313",BAT029
+Dayton-05,DJI-FlyCart-50,SN-DRN-10030,Offline,"901 Hawthorn Pl, Dayton, OH 45405",2024,"901 Hawthorn Pl, Dayton, OH 45405",BAT030
+Columbus-06,Wing-Cormorant-2-ER,SN-DRN-10031,Idle,"1010 Orchard Blvd, Columbus, OH 43202",2024,"1010 Orchard Blvd, Columbus, OH 43202",BAT031
+Cleveland-06,Amazon-MK30-ER,SN-DRN-10032,Charging,"1111 Grove Way, Cleveland, OH 44109",2024,"1111 Grove Way, Cleveland, OH 44109",BAT032
+Cincinnati-06,Zipline-P2-LR,SN-DRN-10033,In-Transit (Delivery),"39.1620,-84.4569",2025,"1212 Park Ct, Cincinnati, OH 45207",BAT033
+Toledo-06,Flytrex-FTX-Gen4,SN-DRN-10034,Maintenance,"1313 River Bend, Toledo, OH 43620",2025,"1313 River Bend, Toledo, OH 43620",BAT034
+Akron-06,AeroDrone-Cargo-200,SN-DRN-10035,In-Transit (Pickup),"41.1415,-81.5178",2025,"1414 Meadow St, Akron, OH 44301",BAT035
+Dayton-06,SkyLift-Heavy-D3,SN-DRN-10036,Offline,"1515 Lake Aly, Dayton, OH 45406",2025,"1515 Lake Aly, Dayton, OH 45406",BAT036
+Columbus-07,Condor-Logistics-CL3,SN-DRN-10037,Idle,"1616 Forest St, Columbus, OH 43203",2025,"1616 Forest St, Columbus, OH 43203",BAT037
+Cleveland-07,Atlas-Unmanned-AU-Cargo-3,SN-DRN-10038,Charging,"1717 Hillside Ave, Cleveland, OH 44111",2025,"1717 Hillside Ave, Cleveland, OH 44111",BAT038
+Cincinnati-07,Matternet-M2-Med,SN-DRN-10039,In-Transit (Delivery),"39.1031,-84.5120",2023,"1818 Valley Ln, Cincinnati, OH 45208",BAT039
+Toledo-07,DJI-Agras-CargoMod,SN-DRN-10040,Maintenance,"1919 Summit Dr, Toledo, OH 43623",2021,"1919 Summit Dr, Toledo, OH 43623",BAT040
