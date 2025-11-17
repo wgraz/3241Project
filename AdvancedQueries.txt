@@ -1,0 +1,33 @@
+-- Provide a list of member names, along with the total combined amount of all items they have rented out. 
+SELECT M.fName, M.lName, COUNT(r.serialNum)
+FROM Members AS M
+JOIN Rentals AS R ON M.userID=R.userID
+GROUP BY M.userID, M.fName, M.lName;
+
+-- Provide a list of member names and email addresses for members who have rented more equipment than the average member. 
+SELECT M.fName, M.lName, M.email, TotalRented
+FROM Members AS M
+JOIN Rentals AS R ON M.userID = R.userID
+GROUP BY M.userID, M.fName, M.lName, M.email
+HAVING COUNT(R.serialNum) AS TotalRented > (
+    SELECT AVG(RentalCount)
+    FROM (
+        SELECT COUNT(R2.serialNum) AS RentalCount
+        FROM Rentals AS R2
+        GROUP BY R2.UserID
+    ) AS AVG Rentals
+);
+
+-- Provide a list of the equipment in the database and associated total copies rented to members, sorted from the equipment that has been rented the most to the equipment that has been rented the least.
+SELECT E.type, E.model, COUNT(R.serialNum) AS CopiesRented
+FROM Equipment AS E
+JOIN Rentals AS R ON E.serialNum=R.serialNum
+GROUP BY E.type, E.model, E.year
+ORDER BY CopiesRented DESC;
+ 
+-- Provide a list of the drones in the database and the total number of miles flown, sorted from the ones that have been delivered the highest number of items to the ones delivered the lowest. 
+SELECT D.name, D.model, D.serialNum, COALESCE(SUM(t.milesFlown),0), COUNT(T.eSerialNum) AS ItemsDelivered
+FROM Drones AS D
+LEFT JOIN Transports AS T ON D.serialNum=T.dSerialNum
+GROUP BY D.serialNum, D.Model
+ORDER BY ItemsDelivered DESC;
