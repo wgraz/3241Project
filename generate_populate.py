@@ -21,7 +21,8 @@ SCHEMA_DEFINITION = {
         'phone': 'string',
         'email': 'string',
         'startDate': 'string',
-        'userID': 'string'
+        'userID': 'string',
+        'warehouseDistance': 'numeric'
     },
     'drone_model': { # Matches 'drone_model.csv'
         'weightCap': 'numeric',
@@ -49,7 +50,8 @@ SCHEMA_DEFINITION = {
         'location': 'string',
         'year': 'numeric',
         'WarehouseAddress': 'string',
-        'BatteryID': 'string'
+        'BatteryID': 'string',
+        'totalMiles': 'numeric'
     },
     'order_price': { # Matches 'order_price.csv'
         'elementType': 'string',
@@ -83,7 +85,8 @@ SCHEMA_DEFINITION = {
         'warExp': 'string',
         'warehouseAddress': 'string',
         'orderNum': 'numeric',
-        'renterID': 'string'
+        'renterID': 'string',
+        'warehouseID': 'numeric'
     },
     'rentals': { # Matches 'rentals.csv'
         'serialNum': 'string',
@@ -268,7 +271,6 @@ def generate_populate_script():
             f_out.write("COMMIT;\n")
             
         print(f"\nSuccessfully generated '{output_file}'!")
-        print("You can now run this SQL script on your SQLite database.")
 
     except IOError as e:
         print(f"Error writing to output file {output_file}: {e}")
