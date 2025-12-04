@@ -93,6 +93,7 @@ SCHEMA_DEFINITION = {
         'userID': 'string',
         'checkOutID': 'string',
         'dueDate': 'string',
+        'rentedHours': 'numeric',
         'rentalFees': 'numeric',
         'Returns': 'string'
     },
