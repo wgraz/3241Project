@@ -6,25 +6,13 @@ import java.util.InputMismatchException;
 public class RentalAppConnected {
     // --- REPORT REQUIREMENT (SQL Injection Explanation) ---
     /*
-     * This code strictly adheres to best practices to prevent SQL Injection
-     * attacks.
+     * SQL Injection Prevention:
      * Approach: Use of Prepared Statements (java.sql.PreparedStatement) for ALL
      * database operations.
-     * * Example Demonstration (from editMember method):
-     * String sql = "UPDATE members SET fname = ? WHERE userID = ?;"; // SAFE
-     * try (PreparedStatement ps = conn.prepareStatement(sql)) {
-     * ps.setString(1, fname); // Input is treated only as a value, never executable
-     * code.
-     * ps.setString(2, userID);
-     * ps.executeUpdate();
-     * }
      * This ensures that malicious input is safely escaped and treated as literal
      * data.
      */
     private static Scanner input = new Scanner(System.in);
-
-    // NOTE: This assumes a working static method Database.getConnection() exists
-    // to establish a JDBC connection to the SQLite database.
 
     public static void main(String[] args) {
         boolean running = true;
@@ -68,11 +56,11 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- CORE HELPER METHODS (Argument-less versions for basic input) ---
+    // HELPER METHODS
     // ==========================================================
 
     /**
-     * Forces input until a valid integer is provided (No prompt argument).
+     * Forces input until a valid integer is provided
      */
     private static int getIntInput() {
         while (true) {
@@ -133,7 +121,7 @@ public class RentalAppConnected {
         }
     }
 
-    // --- Generic Existence Check Helper ---
+    // Generic Existence Check Helper
     private static boolean checkExistence(String table, String column, String value) {
         String sql = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?;";
         try (Connection conn = Database.getConnection();
@@ -149,7 +137,7 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- 1. MEMBER MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // --- 1. MEMBER MANAGEMENT
     // ==========================================================
 
     private static void membersMenu() {
@@ -198,13 +186,11 @@ public class RentalAppConnected {
         String phone = getStringInput("Enter phone: ");
         String email = getStringInput("Enter email: ");
 
-        // CORRECTION: Print prompt, then call argument-less method
         System.out.print("Enter warehouse distance (numeric, mandatory): ");
         double dist = getDoubleInput();
 
         String startDate = LocalDate.now().toString();
 
-        // All 8 columns are non-null and explicitly bound
         String sql = "INSERT INTO members(userID, fname, lname, address, phone, email, startDate, warehouseDistance) " +
                 "VALUES(?,?,?,?,?,?,?,?);";
 
@@ -217,7 +203,7 @@ public class RentalAppConnected {
             ps.setString(5, phone);
             ps.setString(6, email);
             ps.setString(7, startDate);
-            ps.setDouble(8, dist); // Set mandatory double
+            ps.setDouble(8, dist);
 
             ps.executeUpdate();
             System.out.println("Member added. startDate set to " + startDate);
@@ -384,7 +370,7 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- 2. EQUIPMENT MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // 2. EQUIPMENT MANAGEMENT
     // ==========================================================
 
     private static void equipmentMenu() {
@@ -427,21 +413,17 @@ public class RentalAppConnected {
     private static void addEquipment() {
         System.out.println("--- Adding New Equipment (All fields mandatory) ---");
 
-        // String inputs, guaranteed non-empty
         String serial = getStringInput("Enter serialNum (unique): ");
         String desc = getStringInput("Description: ");
         String type = getStringInput("Type: ");
         String model = getStringInput("Model: ");
 
-        // CORRECTION: Print prompt, then call argument-less method
         System.out.print("Year (numeric): ");
         int year = getYearInput();
 
-        // CORRECTION: Print prompt, then call argument-less method
         System.out.print("Enter warehouseID (numeric): ");
-        int wid = getIntInput(); // FIX APPLIED HERE
+        int wid = getIntInput();
 
-        // String inputs, guaranteed non-empty
         String wAddr = getStringInput("Enter warehouse address: ");
         String orderNum = getStringInput("Enter Purchase Order Number (orderNum - string): ");
         String location = getStringInput("Enter Equipment Location: ");
@@ -621,7 +603,7 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- 3. DRONE MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // --- 3. DRONE MANAGEMENT
     // ==========================================================
 
     private static void dronesMenu() {
@@ -672,7 +654,6 @@ public class RentalAppConnected {
         // String input, guaranteed non-empty
         String location = getStringInput("Enter Location: ");
 
-        // CORRECTION: Print prompt, then call argument-less method
         System.out.print("Enter Year (numeric): ");
         int year = getYearInput();
 
@@ -680,12 +661,11 @@ public class RentalAppConnected {
         String wAddr = getStringInput("Enter Warehouse Address: ");
         String batteryID = getStringInput("Enter Battery ID: ");
 
-        // CORRECTION: Print prompt, then call argument-less method
         System.out.print("Enter Total Miles (numeric): ");
         double totalMiles = getDoubleInput();
 
         // Fields: serialNum, name, model, status, location, year,
-        // WarehouseAddress, BatteryID, totalMiles (9 COLUMNS TOTAL)
+        // WarehouseAddress, BatteryID, totalMiles
         String sql = "INSERT INTO drones(serialNum, name, model, status, location, year, WarehouseAddress, BatteryID, totalMiles) VALUES(?,?,?,?,?,?,?,?,?);";
 
         try (Connection conn = Database.getConnection();
@@ -695,7 +675,6 @@ public class RentalAppConnected {
             ps.setString(3, model);
             ps.setString(4, "AVAILABLE"); // Default status
 
-            // Correctly indexed parameters
             ps.setString(5, location);
             ps.setInt(6, year);
             ps.setString(7, wAddr);
@@ -846,7 +825,7 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- 4. RENTALS & DELIVERIES (Transactional Operations) ---
+    // 4. RENTALS & DELIVERIES
     // ==========================================================
 
     private static void rentalsMenu() {
@@ -950,15 +929,10 @@ public class RentalAppConnected {
         System.out.print("Enter checkout ID to return: ");
         String checkOutID = input.nextLine().trim();
 
-        // returnDate is intentionally omitted from variable and SQL UPDATE since the
-        // schema lacks it.
-
         String findSerial = "SELECT serialNum FROM rentals WHERE checkOutID = ? AND Returns = 'NO';";
 
-        // CORRECTED SQL: Only updates the 'Returns' column to 'YES' (1 parameter).
         String updateRental = "UPDATE rentals SET Returns = ? WHERE checkOutID = ?;";
 
-        // Sets renterID back to the placeholder '0' (per 'no NULL' requirement).
         String updateEquipment = "UPDATE equipment SET status = ?, renterID = '0' WHERE serialNum = ? AND status = 'RENTED';";
 
         try (Connection conn = Database.getConnection()) {
@@ -1063,7 +1037,7 @@ public class RentalAppConnected {
     }
 
     // ==========================================================
-    // --- 5. REPORTS ---
+    // 5. REPORTS
     // ==========================================================
 
     private static void reportsMenu() {
