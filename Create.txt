@@ -116,6 +116,7 @@ create table Rentals
   dueDate varchar(20),
   rentalFees DECIMAL(10, 2),
   returns varchar(50),
+  rentedHours int,
   FOREIGN KEY (serialNum) REFERENCES Equipment(serialNum),
   FOREIGN KEY (userID) REFERENCES Members(userID)
 );
