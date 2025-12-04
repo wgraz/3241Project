@@ -93,9 +93,9 @@ SCHEMA_DEFINITION = {
         'userID': 'string',
         'checkOutID': 'string',
         'dueDate': 'string',
-        'rentedHours': 'numeric',
         'rentalFees': 'numeric',
-        'Returns': 'string'
+        'Returns': 'string',
+        'rentedHours': 'numeric'
     },
     'reviews': { # Matches 'reviews.csv'
         'serialNum': 'string',
