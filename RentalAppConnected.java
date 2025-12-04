@@ -1,22 +1,16 @@
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class RentalAppConnected {
-
-    // SQL Injection Explanation
+    // --- REPORT REQUIREMENT (SQL Injection Explanation) ---
     /*
      * This code strictly adheres to best practices to prevent SQL Injection
      * attacks.
      * Approach: Use of Prepared Statements (java.sql.PreparedStatement) for ALL
      * database operations.
-     * 
-     * Example Demonstration (from editMember method):
-     * Instead of concatenating user input directly:
-     * String sql = "UPDATE members SET fname = '" + fname + "' WHERE userID = '" +
-     * userID + "';"; // UNSAFE
-     * 
-     * The application uses placeholders (?) and sets parameters:
+     * * Example Demonstration (from editMember method):
      * String sql = "UPDATE members SET fname = ? WHERE userID = ?;"; // SAFE
      * try (PreparedStatement ps = conn.prepareStatement(sql)) {
      * ps.setString(1, fname); // Input is treated only as a value, never executable
@@ -24,11 +18,13 @@ public class RentalAppConnected {
      * ps.setString(2, userID);
      * ps.executeUpdate();
      * }
-     * This ensures that malicious input (e.g., ' or 1=1 --) is safely escaped and
-     * treated as literal data, preventing the input from being executed as a SQL
-     * command.
+     * This ensures that malicious input is safely escaped and treated as literal
+     * data.
      */
     private static Scanner input = new Scanner(System.in);
+
+    // NOTE: This assumes a working static method Database.getConnection() exists
+    // to establish a JDBC connection to the SQLite database.
 
     public static void main(String[] args) {
         boolean running = true;
@@ -71,7 +67,13 @@ public class RentalAppConnected {
         input.close();
     }
 
-    // HELPER METHOD
+    // ==========================================================
+    // --- CORE HELPER METHODS (Argument-less versions for basic input) ---
+    // ==========================================================
+
+    /**
+     * Forces input until a valid integer is provided (No prompt argument).
+     */
     private static int getIntInput() {
         while (true) {
             try {
@@ -83,7 +85,72 @@ public class RentalAppConnected {
         }
     }
 
-    // 1. MEMBER MANAGEMENT (Add/Modify/Remove/Retrieve)
+    /**
+     * Forces input until a non-empty, trimmed string is provided.
+     */
+    private static String getStringInput(String prompt) {
+        String inputStr = "";
+        while (inputStr.trim().isEmpty()) {
+            System.out.print(prompt);
+            inputStr = input.nextLine().trim();
+            if (inputStr.isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter a value.");
+            }
+        }
+        return inputStr;
+    }
+
+    /**
+     * Forces input until a valid double is provided.
+     */
+    private static double getDoubleInput() {
+        while (true) {
+            try {
+                String line = input.nextLine();
+                return Double.parseDouble(line.trim());
+            } catch (NumberFormatException e) {
+                System.out.print("Please enter a valid numeric value: ");
+            }
+        }
+    }
+
+    /**
+     * Forces input until a valid integer year is provided.
+     */
+    private static int getYearInput() {
+        while (true) {
+            try {
+                String line = input.nextLine();
+                int year = Integer.parseInt(line.trim());
+                if (year > 1900 && year <= LocalDate.now().getYear() + 5) { // Simple validation
+                    return year;
+                } else {
+                    System.out.print("Please enter a realistic year (e.g., 2024): ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Please enter a valid numeric year: ");
+            }
+        }
+    }
+
+    // --- Generic Existence Check Helper ---
+    private static boolean checkExistence(String table, String column, String value) {
+        String sql = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?;";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, value);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.err.println("Database check error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // ==========================================================
+    // --- 1. MEMBER MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // ==========================================================
 
     private static void membersMenu() {
         boolean back = false;
@@ -92,8 +159,8 @@ public class RentalAppConnected {
             System.out.println("1. Add Member");
             System.out.println("2. Edit Member");
             System.out.println("3. Delete Member");
-            System.out.println("4. Search Member");
-            System.out.println("5. View All Members");
+            System.out.println("4. Search Member (Retrieve)");
+            System.out.println("5. View All Members (Retrieve)");
             System.out.println("6. Back");
             System.out.print("Choose: ");
             int c = getIntInput();
@@ -123,32 +190,21 @@ public class RentalAppConnected {
     }
 
     private static void addMember() {
-        System.out.print("Enter userID: ");
-        String userID = input.nextLine().trim();
-        System.out.print("Enter first name: ");
-        String fname = input.nextLine().trim();
-        System.out.print("Enter last name: ");
-        String lname = input.nextLine().trim();
-        System.out.print("Enter address: ");
-        String addr = input.nextLine().trim();
-        System.out.print("Enter phone: ");
-        String phone = input.nextLine().trim();
-        System.out.print("Enter email: ");
-        String email = input.nextLine().trim();
+        System.out.println("--- Adding New Member (All fields mandatory) ---");
+        String userID = getStringInput("Enter userID (unique): ");
+        String fname = getStringInput("Enter first name: ");
+        String lname = getStringInput("Enter last name: ");
+        String addr = getStringInput("Enter address: ");
+        String phone = getStringInput("Enter phone: ");
+        String email = getStringInput("Enter email: ");
 
-        // Assuming database supports a warehouseDistance column based on project
-        // requirements
-        System.out.print("Enter warehouse distance: ");
-        String distS = input.nextLine().trim();
-        Double dist = null;
-        try {
-            if (!distS.isEmpty())
-                dist = Double.parseDouble(distS);
-        } catch (NumberFormatException e) {
-            /* use null */ }
+        // CORRECTION: Print prompt, then call argument-less method
+        System.out.print("Enter warehouse distance (numeric, mandatory): ");
+        double dist = getDoubleInput();
 
         String startDate = LocalDate.now().toString();
 
+        // All 8 columns are non-null and explicitly bound
         String sql = "INSERT INTO members(userID, fname, lname, address, phone, email, startDate, warehouseDistance) " +
                 "VALUES(?,?,?,?,?,?,?,?);";
 
@@ -161,10 +217,8 @@ public class RentalAppConnected {
             ps.setString(5, phone);
             ps.setString(6, email);
             ps.setString(7, startDate);
-            if (dist != null)
-                ps.setDouble(8, dist);
-            else
-                ps.setNull(8, Types.REAL);
+            ps.setDouble(8, dist); // Set mandatory double
+
             ps.executeUpdate();
             System.out.println("Member added. startDate set to " + startDate);
         } catch (SQLException e) {
@@ -182,7 +236,7 @@ public class RentalAppConnected {
             return;
         }
 
-        System.out.println("Enter new values (leave blank to keep current):");
+        System.out.println("Enter new values (leave blank to keep current, you can't unset a value):");
         System.out.print("New first name: ");
         String fname = input.nextLine();
         System.out.print("New last name: ");
@@ -268,7 +322,7 @@ public class RentalAppConnected {
     }
 
     private static void searchMember() {
-        System.out.println("Search by: 1) userID  2) last name");
+        System.out.println("Search by: 1) userID  2) last name");
         int choice = getIntInput();
         String sql = "";
         String param = "";
@@ -278,7 +332,7 @@ public class RentalAppConnected {
             param = input.nextLine().trim();
             sql = "SELECT * FROM members WHERE userID = ?;";
         } else if (choice == 2) {
-            System.out.print("Enter last name: ");
+            System.out.print("Enter last name (partial allowed): ");
             param = "%" + input.nextLine().trim() + "%";
             sql = "SELECT * FROM members WHERE lname LIKE ?;";
         } else {
@@ -325,25 +379,13 @@ public class RentalAppConnected {
                 "userID=" + rs.getString("userID") +
                         " | Name=" + rs.getString("fname") + " " + rs.getString("lname") +
                         " | addr=" + rs.getString("address") +
-                        " | email=" + rs.getString("email"));
+                        " | email=" + rs.getString("email") +
+                        " | Dist=" + rs.getDouble("warehouseDistance"));
     }
 
-    // Generic Existence Check Helper
-    private static boolean checkExistence(String table, String column, String value) {
-        String sql = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?;";
-        try (Connection conn = Database.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, value);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
-            }
-        } catch (SQLException e) {
-            System.err.println("Database check error: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // 2. EQUIPMENT MANAGEMENT (Add/Modify/Remove/Retrieve)
+    // ==========================================================
+    // --- 2. EQUIPMENT MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // ==========================================================
 
     private static void equipmentMenu() {
         boolean back = false;
@@ -352,8 +394,8 @@ public class RentalAppConnected {
             System.out.println("1. Add Equipment");
             System.out.println("2. Edit Equipment");
             System.out.println("3. Delete Equipment");
-            System.out.println("4. Search Equipment");
-            System.out.println("5. View All Equipment");
+            System.out.println("4. Search Equipment (Retrieve)");
+            System.out.println("5. View All Equipment (Retrieve)");
             System.out.println("6. Back");
             System.out.print("Choose: ");
             int c = getIntInput();
@@ -383,42 +425,47 @@ public class RentalAppConnected {
     }
 
     private static void addEquipment() {
-        System.out.print("Enter serialNum: ");
-        String serial = input.nextLine().trim();
-        System.out.print("Description: ");
-        String desc = input.nextLine().trim();
-        System.out.print("Type: ");
-        String type = input.nextLine().trim();
-        System.out.print("Model: ");
-        String model = input.nextLine().trim();
-        System.out.print("Year (numeric or blank): ");
-        String yearS = input.nextLine().trim();
-        Integer year = null;
-        if (!yearS.isEmpty()) {
-            try {
-                year = Integer.parseInt(yearS);
-            } catch (NumberFormatException e) {
-                year = null;
-            }
-        }
+        System.out.println("--- Adding New Equipment (All fields mandatory) ---");
 
-        // Assuming database supports a warehouseID column based on project requirements
-        System.out.print("Enter warehouseID: ");
-        String wid = input.nextLine().trim();
+        // String inputs, guaranteed non-empty
+        String serial = getStringInput("Enter serialNum (unique): ");
+        String desc = getStringInput("Description: ");
+        String type = getStringInput("Type: ");
+        String model = getStringInput("Model: ");
 
-        String sql = "INSERT INTO equipment(serialNum, description, type, model, year, status, warehouseID) VALUES(?,?,?,?,?,?,?);";
+        // CORRECTION: Print prompt, then call argument-less method
+        System.out.print("Year (numeric): ");
+        int year = getYearInput();
+
+        // CORRECTION: Print prompt, then call argument-less method
+        System.out.print("Enter warehouseID (numeric): ");
+        int wid = getIntInput(); // FIX APPLIED HERE
+
+        // String inputs, guaranteed non-empty
+        String wAddr = getStringInput("Enter warehouse address: ");
+        String orderNum = getStringInput("Enter Purchase Order Number (orderNum - string): ");
+        String location = getStringInput("Enter Equipment Location: ");
+        String warExp = getStringInput("Enter Warranty Expiration Date (YYYY-MM-DD): ");
+
+        // Fields: serialNum, description, type, model, year, status, warehouseID,
+        // warehouseAddress, orderNum, location, warExp, renterID
+        String sql = "INSERT INTO equipment(serialNum, description, type, model, year, status, warehouseID, warehouseAddress, orderNum, location, warExp, renterID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+
         try (Connection conn = Database.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, serial);
             ps.setString(2, desc);
             ps.setString(3, type);
             ps.setString(4, model);
-            if (year != null)
-                ps.setInt(5, year);
-            else
-                ps.setNull(5, Types.INTEGER);
+            ps.setInt(5, year);
             ps.setString(6, "AVAILABLE"); // Default status
-            ps.setString(7, wid);
+            ps.setInt(7, wid); // Mandatory int
+            ps.setString(8, wAddr); // Mandatory string
+            ps.setString(9, orderNum); // Mandatory string/numeric
+            ps.setString(10, location); // Mandatory string
+            ps.setString(11, warExp); // Mandatory string
+            ps.setString(12, "0"); // Placeholder non-null value for renterID (unrented)
+
             ps.executeUpdate();
             System.out.println("Equipment added.");
         } catch (SQLException e) {
@@ -497,7 +544,7 @@ public class RentalAppConnected {
     }
 
     private static void deleteEquipment() {
-        System.out.print("Enter equipment serialNum to delete: ");
+        System.out.print("Enter serialNum of equipment to delete: ");
         String serial = input.nextLine().trim();
 
         String sql = "DELETE FROM equipment WHERE serialNum = ?;";
@@ -512,7 +559,7 @@ public class RentalAppConnected {
     }
 
     private static void searchEquipment() {
-        System.out.println("Search by: 1) SerialNum  2) Type");
+        System.out.println("Search by: 1) SerialNum  2) Type");
         int choice = getIntInput();
         String sql = "";
         String param = "";
@@ -569,10 +616,13 @@ public class RentalAppConnected {
                 " | desc=" + rs.getString("description") +
                 " | type=" + rs.getString("type") +
                 " | model=" + rs.getString("model") +
-                " | status=" + rs.getString("status"));
+                " | status=" + rs.getString("status") +
+                " | RenterID=" + rs.getString("renterID"));
     }
 
-    // 3. DRONE MANAGEMENT (Add/Modify/Remove/Retrieve)
+    // ==========================================================
+    // --- 3. DRONE MANAGEMENT (Add/Modify/Remove/Retrieve) ---
+    // ==========================================================
 
     private static void dronesMenu() {
         boolean back = false;
@@ -581,8 +631,8 @@ public class RentalAppConnected {
             System.out.println("1. Add Drone");
             System.out.println("2. Edit Drone");
             System.out.println("3. Delete Drone");
-            System.out.println("4. Search Drone");
-            System.out.println("5. View All Drones");
+            System.out.println("4. Search Drone (Retrieve)");
+            System.out.println("5. View All Drones (Retrieve)");
             System.out.println("6. Back");
             System.out.print("Choose: ");
             int c = getIntInput();
@@ -612,34 +662,46 @@ public class RentalAppConnected {
     }
 
     private static void addDrone() {
-        System.out.print("Enter serialNum: ");
-        String serial = input.nextLine().trim();
-        System.out.print("Name: ");
-        String name = input.nextLine().trim();
-        System.out.print("Model: ");
-        String model = input.nextLine().trim();
-        System.out.print("Weight Capacity: ");
-        String weightCapS = input.nextLine().trim();
-        Double weightCap = null;
-        try {
-            if (!weightCapS.isEmpty())
-                weightCap = Double.parseDouble(weightCapS);
-        } catch (NumberFormatException e) {
-            /* use null */ }
+        System.out.println("--- Adding New Drone (All fields mandatory) ---");
 
-        // Assuming table 'drones' has columns: serialNum, name, model, status,
-        // weightCapacity
-        String sql = "INSERT INTO drones(serialNum, name, model, status, weightCapacity) VALUES(?,?,?,?,?);";
+        // String inputs, guaranteed non-empty
+        String serial = getStringInput("Enter serialNum (unique): ");
+        String name = getStringInput("Name: ");
+        String model = getStringInput("Model: ");
+
+        // String input, guaranteed non-empty
+        String location = getStringInput("Enter Location: ");
+
+        // CORRECTION: Print prompt, then call argument-less method
+        System.out.print("Enter Year (numeric): ");
+        int year = getYearInput();
+
+        // String inputs, guaranteed non-empty
+        String wAddr = getStringInput("Enter Warehouse Address: ");
+        String batteryID = getStringInput("Enter Battery ID: ");
+
+        // CORRECTION: Print prompt, then call argument-less method
+        System.out.print("Enter Total Miles (numeric): ");
+        double totalMiles = getDoubleInput();
+
+        // Fields: serialNum, name, model, status, location, year,
+        // WarehouseAddress, BatteryID, totalMiles (9 COLUMNS TOTAL)
+        String sql = "INSERT INTO drones(serialNum, name, model, status, location, year, WarehouseAddress, BatteryID, totalMiles) VALUES(?,?,?,?,?,?,?,?,?);";
+
         try (Connection conn = Database.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, serial);
             ps.setString(2, name);
             ps.setString(3, model);
             ps.setString(4, "AVAILABLE"); // Default status
-            if (weightCap != null)
-                ps.setDouble(5, weightCap);
-            else
-                ps.setNull(5, Types.REAL);
+
+            // Correctly indexed parameters
+            ps.setString(5, location);
+            ps.setInt(6, year);
+            ps.setString(7, wAddr);
+            ps.setString(8, batteryID);
+            ps.setDouble(9, totalMiles);
+
             ps.executeUpdate();
             System.out.println("Drone added.");
         } catch (SQLException e) {
@@ -661,7 +723,7 @@ public class RentalAppConnected {
         String name = input.nextLine();
         System.out.print("New model: ");
         String model = input.nextLine();
-        System.out.print("New status (AVAILABLE, IN_TRANSIT, or INACTIVE): ");
+        System.out.print("New status (e.g., AVAILABLE, IN_TRANSIT, INACTIVE): ");
         String status = input.nextLine();
 
         StringBuilder sb = new StringBuilder("UPDATE drones SET ");
@@ -708,7 +770,7 @@ public class RentalAppConnected {
     }
 
     private static void deleteDrone() {
-        System.out.print("Enter drone serialNum to delete: ");
+        System.out.print("Enter serialNum of drone to delete: ");
         String serial = input.nextLine().trim();
 
         String sql = "DELETE FROM drones WHERE serialNum = ?;";
@@ -723,7 +785,7 @@ public class RentalAppConnected {
     }
 
     private static void searchDrone() {
-        System.out.println("Search by: 1) SerialNum  2) Model");
+        System.out.println("Search by: 1) SerialNum  2) Model");
         int choice = getIntInput();
         String sql = "";
         String param = "";
@@ -780,10 +842,12 @@ public class RentalAppConnected {
                 " | name=" + rs.getString("name") +
                 " | model=" + rs.getString("model") +
                 " | status=" + rs.getString("status") +
-                " | capacity=" + rs.getDouble("weightCapacity"));
+                " | miles=" + rs.getDouble("totalMiles"));
     }
 
-    // 4. RENTALS & DELIVERIES (Transactional Operations)
+    // ==========================================================
+    // --- 4. RENTALS & DELIVERIES (Transactional Operations) ---
+    // ==========================================================
 
     private static void rentalsMenu() {
         boolean back = false;
@@ -791,8 +855,8 @@ public class RentalAppConnected {
             System.out.println("\n--- RENTALS & DELIVERIES ---");
             System.out.println("1. Rent Equipment");
             System.out.println("2. Return Equipment");
-            System.out.println("3. Schedule Delivery");
-            System.out.println("4. Schedule Pickup");
+            System.out.println("3. Schedule Delivery (assign drone)");
+            System.out.println("4. Schedule Pickup (assign drone)");
             System.out.println("5. Back");
             System.out.print("Choose: ");
             int c = getIntInput();
@@ -820,53 +884,46 @@ public class RentalAppConnected {
 
     // RENT EQUIPMENT: Inserts new rental record, updates equipment status.
     private static void rentEquipment() {
-        System.out.print("Enter checkout ID (unique): ");
-        String checkOutID = input.nextLine().trim();
-        System.out.print("Enter equipment serialNum: ");
-        String serial = input.nextLine().trim();
-        System.out.print("Enter userID renting: ");
-        String userID = input.nextLine().trim();
+        System.out.println("--- Rent Equipment (All fields mandatory) ---");
+        String checkOutID = getStringInput("Enter checkout ID (unique): ");
+        String serial = getStringInput("Enter equipment serialNum: ");
+        String userID = getStringInput("Enter userID renting: ");
+
+        // Due date is mandatory
+        String due = getStringInput("Enter dueDate (YYYY-MM-DD): ");
+
+        // Print prompt, then call argument-less method
+        System.out.print("Enter rental fee (numeric): ");
+        double fee = getDoubleInput();
 
         if (!checkExistence("equipment", "serialNum", serial)) {
             System.out.println("Error: Equipment not found.");
             return;
         }
 
-        String today = LocalDate.now().toString();
-        System.out.print("Enter dueDate (YYYY-MM-DD) or blank: ");
-        String due = input.nextLine().trim();
-        System.out.print("Enter rental fee (numeric) or blank: ");
-        String feeS = input.nextLine().trim();
-        Double fee = null;
-        try {
-            if (!feeS.isEmpty())
-                fee = Double.parseDouble(feeS);
-        } catch (NumberFormatException e) {
-            fee = null;
-        }
-
         // 1. INSERT into rentals
-        String sql = "INSERT INTO rentals(checkOutID, serialNum, userID, checkOutDate, dueDate, rentalFees, Returns) " +
-                "VALUES(?,?,?,?,?,?,?);";
-        try (Connection conn = Database.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        // Fields: checkOutID, serialNum, userID, dueDate, rentalFees, Returns (6
+        // columns)
+        String sql = "INSERT INTO rentals(checkOutID, serialNum, userID, dueDate, rentalFees, Returns) " +
+                "VALUES(?,?,?,?,?,?);";
+
+        try (Connection conn = Database.getConnection()) {
             conn.setAutoCommit(false); // Start transaction
-            ps.setString(1, checkOutID);
-            ps.setString(2, serial);
-            ps.setString(3, userID);
-            ps.setString(4, today);
-            if (!due.isEmpty())
-                ps.setString(5, due);
-            else
-                ps.setNull(5, Types.VARCHAR);
-            if (fee != null)
-                ps.setDouble(6, fee);
-            else
-                ps.setNull(6, Types.REAL);
-            ps.setString(7, "NO");
-            ps.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, checkOutID);
+                ps.setString(2, serial);
+                ps.setString(3, userID);
+                // Index 4 corresponds to dueDate (provided by the user)
+                ps.setString(4, due);
+                // Index 5 corresponds to rentalFees
+                ps.setDouble(5, fee);
+                // Index 6 corresponds to Returns
+                ps.setString(6, "NO");
+                ps.executeUpdate();
+            }
 
             // 2. UPDATE equipment status
+            // Sets renterID to the renting userID and status to RENTED.
             String eqUpd = "UPDATE equipment SET renterID = ?, status = ? WHERE serialNum = ? AND status = 'AVAILABLE';";
             try (PreparedStatement ps2 = conn.prepareStatement(eqUpd)) {
                 ps2.setString(1, userID);
@@ -876,7 +933,8 @@ public class RentalAppConnected {
                 if (updated == 0) {
                     // Equipment was not available, abort transaction
                     conn.rollback();
-                    System.out.println("RENT FAILED: Equipment is not AVAILABLE or SerialNum is invalid.");
+                    System.out
+                            .println("RENT FAILED: Equipment is not AVAILABLE or SerialNum is invalid (Rolling back).");
                     return;
                 }
             }
@@ -891,11 +949,17 @@ public class RentalAppConnected {
     private static void returnEquipment() {
         System.out.print("Enter checkout ID to return: ");
         String checkOutID = input.nextLine().trim();
-        String returnDate = LocalDate.now().toString();
+
+        // returnDate is intentionally omitted from variable and SQL UPDATE since the
+        // schema lacks it.
 
         String findSerial = "SELECT serialNum FROM rentals WHERE checkOutID = ? AND Returns = 'NO';";
-        String updateRental = "UPDATE rentals SET Returns = ?, returnDate = ? WHERE checkOutID = ?;";
-        String updateEquipment = "UPDATE equipment SET status = ?, renterID = NULL WHERE serialNum = ? AND status = 'RENTED';";
+
+        // CORRECTED SQL: Only updates the 'Returns' column to 'YES' (1 parameter).
+        String updateRental = "UPDATE rentals SET Returns = ? WHERE checkOutID = ?;";
+
+        // Sets renterID back to the placeholder '0' (per 'no NULL' requirement).
+        String updateEquipment = "UPDATE equipment SET status = ?, renterID = '0' WHERE serialNum = ? AND status = 'RENTED';";
 
         try (Connection conn = Database.getConnection()) {
             conn.setAutoCommit(false); // Start transaction
@@ -917,12 +981,11 @@ public class RentalAppConnected {
             // Step 2: Mark the rental record as returned
             try (PreparedStatement ps2 = conn.prepareStatement(updateRental)) {
                 ps2.setString(1, "YES");
-                ps2.setString(2, returnDate);
-                ps2.setString(3, checkOutID);
+                ps2.setString(2, checkOutID); // The second parameter is now the WHERE clause value
                 ps2.executeUpdate();
             }
 
-            // Step 3: Update equipment status
+            // Step 3: Update equipment status (only if currently RENTED)
             try (PreparedStatement ps3 = conn.prepareStatement(updateEquipment)) {
                 ps3.setString(1, "AVAILABLE");
                 ps3.setString(2, serial);
@@ -944,15 +1007,15 @@ public class RentalAppConnected {
         System.out.print("Enter drone serialNum to assign: ");
         String drone = input.nextLine().trim();
 
-        // Linking drone and equipment serial numbers.
-        String sql = "INSERT INTO transports(dSerialNum, eSerialNum, type, date) VALUES(?,?,?,?);";
-        try (Connection conn = Database.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, drone);
-            ps.setString(2, serial);
-            ps.setString(3, "DELIVERY"); // Type of transport
-            ps.setString(4, LocalDate.now().toString());
-            ps.executeUpdate();
+        // Inserts dSerialNum and eSerialNum into transports.
+        String sql = "INSERT INTO transports(dSerialNum, eSerialNum) VALUES(?,?);";
+        try (Connection conn = Database.getConnection()) {
+            conn.setAutoCommit(false); // Start transaction
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, drone);
+                ps.setString(2, serial);
+                ps.executeUpdate();
+            }
 
             // Update drone status to IN_TRANSIT
             String droneUpd = "UPDATE drones SET status = 'IN_TRANSIT' WHERE serialNum = ?;";
@@ -961,6 +1024,7 @@ public class RentalAppConnected {
                 ps2.executeUpdate();
             }
 
+            conn.commit(); // Commit transaction
             System.out.println("Delivery scheduled: equipment " + serial + " via drone " + drone + ".");
         } catch (SQLException e) {
             System.err.println("Schedule Delivery error: " + e.getMessage());
@@ -974,14 +1038,15 @@ public class RentalAppConnected {
         System.out.print("Enter drone serialNum to assign: ");
         String drone = input.nextLine().trim();
 
-        String sql = "INSERT INTO transports(dSerialNum, eSerialNum, type, date) VALUES(?,?,?,?);";
-        try (Connection conn = Database.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, drone);
-            ps.setString(2, serial);
-            ps.setString(3, "PICKUP"); // Type of transport
-            ps.setString(4, LocalDate.now().toString());
-            ps.executeUpdate();
+        // Inserts dSerialNum and eSerialNum into transports.
+        String sql = "INSERT INTO transports(dSerialNum, eSerialNum) VALUES(?,?);";
+        try (Connection conn = Database.getConnection()) {
+            conn.setAutoCommit(false); // Start transaction
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, drone);
+                ps.setString(2, serial);
+                ps.executeUpdate();
+            }
 
             // Update drone status to IN_TRANSIT
             String droneUpd = "UPDATE drones SET status = 'IN_TRANSIT' WHERE serialNum = ?;";
@@ -990,22 +1055,25 @@ public class RentalAppConnected {
                 ps2.executeUpdate();
             }
 
+            conn.commit(); // Commit transaction
             System.out.println("Pickup scheduled: equipment " + serial + " via drone " + drone + ".");
         } catch (SQLException e) {
             System.err.println("Schedule Pickup error: " + e.getMessage());
         }
     }
 
-    // 5. REPORTS
+    // ==========================================================
+    // --- 5. REPORTS ---
+    // ==========================================================
 
     private static void reportsMenu() {
         boolean back = false;
         while (!back) {
             System.out.println("\n--- REPORTS ---");
-            System.out.println("1. Renting checkouts by member");
-            System.out.println("2. Popular item");
+            System.out.println("1. Renting checkouts by member (Total rented per UserID)");
+            System.out.println("2. Popular item (Most rented equipment)");
             System.out.println("3. Popular manufacturer");
-            System.out.println("4. Popular drone");
+            System.out.println("4. Popular drone (Most transports)");
             System.out.println("5. Member who rented most items");
             System.out.println("6. Equipment by type released before YEAR");
             System.out.println("7. Back");
@@ -1063,15 +1131,15 @@ public class RentalAppConnected {
     private static void reportPopularItem() {
         String sql = "SELECT r.serialNum, e.description, COUNT(r.checkOutID) AS timesRented " +
                 "FROM rentals r JOIN equipment e ON r.serialNum = e.serialNum " +
-                "GROUP BY r.serialNum ORDER BY timesRented DESC LIMIT 1;";
+                "GROUP BY r.serialNum, e.description ORDER BY timesRented DESC LIMIT 1;";
         try (Connection conn = Database.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 System.out.println("Most Popular Item:");
-                System.out.println("  Serial: " + rs.getString("serialNum"));
-                System.out.println("  Desc: " + rs.getString("description"));
-                System.out.println("  Times Rented: " + rs.getInt("timesRented"));
+                System.out.println("   Serial: " + rs.getString("serialNum"));
+                System.out.println("   Desc: " + rs.getString("description"));
+                System.out.println("   Times Rented: " + rs.getInt("timesRented"));
             } else {
                 System.out.println("No rental data available.");
             }
@@ -1086,7 +1154,7 @@ public class RentalAppConnected {
         String sql = "SELECT em.manufacturer, COUNT(r.checkOutID) AS rentedCount " +
                 "FROM rentals r " +
                 "JOIN equipment e ON r.serialNum = e.serialNum " +
-                "JOIN equip_model em ON e.model = em.model " + // Assumes 'equip_model' links 'model' to 'manufacturer'
+                "JOIN equip_model em ON e.model = em.model " +
                 "GROUP BY em.manufacturer " +
                 "ORDER BY rentedCount DESC LIMIT 1;";
         try (Connection conn = Database.getConnection();
@@ -1107,16 +1175,16 @@ public class RentalAppConnected {
     private static void reportPopularDrone() {
         String sql = "SELECT t.dSerialNum, d.name, COUNT(t.dSerialNum) AS uses " +
                 "FROM transports t JOIN drones d ON t.dSerialNum = d.serialNum " +
-                "GROUP BY t.dSerialNum " +
+                "GROUP BY t.dSerialNum, d.name " +
                 "ORDER BY uses DESC LIMIT 1;";
         try (Connection conn = Database.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 System.out.println("Most Popular Drone:");
-                System.out.println("  Serial: " + rs.getString("dSerialNum"));
-                System.out.println("  Name: " + rs.getString("name"));
-                System.out.println("  Transports: " + rs.getInt("uses"));
+                System.out.println("   Serial: " + rs.getString("dSerialNum"));
+                System.out.println("   Name: " + rs.getString("name"));
+                System.out.println("   Transports: " + rs.getInt("uses"));
             } else {
                 System.out.println("No transport data available.");
             }
@@ -1129,16 +1197,16 @@ public class RentalAppConnected {
     private static void reportMemberWithMostItems() {
         String sql = "SELECT r.userID, m.fname, m.lname, COUNT(r.checkOutID) AS totalRented " +
                 "FROM rentals r JOIN members m ON r.userID = m.userID " +
-                "GROUP BY r.userID " +
+                "GROUP BY r.userID, m.fname, m.lname " +
                 "ORDER BY totalRented DESC LIMIT 1;";
         try (Connection conn = Database.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 System.out.println("Top Renter:");
-                System.out.println("  UserID: " + rs.getString("userID"));
-                System.out.println("  Name: " + rs.getString("fname") + " " + rs.getString("lname"));
-                System.out.println("  Total Items Rented: " + rs.getInt("totalRented"));
+                System.out.println("   UserID: " + rs.getString("userID"));
+                System.out.println("   Name: " + rs.getString("fname") + " " + rs.getString("lname"));
+                System.out.println("   Total Items Rented: " + rs.getInt("totalRented"));
             } else {
                 System.out.println("No rental records yet.");
             }
@@ -1163,7 +1231,7 @@ public class RentalAppConnected {
                 boolean any = false;
                 System.out.println("--- Equipment of type '" + type + "' made before " + year + " ---");
                 while (rs.next()) {
-                    System.out.println("  serial=" + rs.getString("serialNum") +
+                    System.out.println("   serial=" + rs.getString("serialNum") +
                             " | desc=" + rs.getString("description") +
                             " | year=" + rs.getInt("year"));
                     any = true;
