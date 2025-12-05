@@ -1,0 +1,3 @@
+CREATE INDEX idxUserID ON Rentals(userID);
+CREATE INDEX idxSerialNum ON Rentals(userID);
+CREATE INDEX idxType ON Equipment(type);
